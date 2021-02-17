@@ -2,11 +2,10 @@ id: 28f0b748-207a-4e5c-84cc-be13da2ade48
 name: Create Local User
 description: Creates a local user on the specified computer
 metadata:
-  version: 1
+  version: 2
   authors:
     - w0rk3r
-  tags:
-    - Powerview
+  tags: []
 tactic: persistence
 technique:
   id: T1136.001
