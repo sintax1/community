@@ -1,9 +1,9 @@
 id: 1bfcd55d-05e1-4404-a112-8c65cb4652fa
 metadata:
   version: 1
-    authors:
-      - 231tr0n
-    tags: []
+  authors:
+    - 231tr0n
+  tags: []
 name: List all installed packages
 description: |
   This command is used to get a list of all the packages installed in a computer.
