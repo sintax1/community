@@ -16,12 +16,12 @@ platforms:
   linux:
     sh:
       command: nohup ./pneuma-linux >/dev/null 2>&1 &
-      payload: https://s3.amazonaws.com/operator.payloads/pneuma/pneuma-linux
+      payload: '#{operator.payloads}/pneuma/pneuma-linux'
   darwin:
     sh:
       command: nohup ./pneuma-darwin >/dev/null 2>&1 &
-      payload: https://s3.amazonaws.com/operator.payloads/pneuma/pneuma-darwin
+      payload: '#{operator.payloads}/pneuma/pneuma-darwin'
   windows:
     psh:
       command: Start-Process .\pneuma-windows.exe
-      payload: https://s3.amazonaws.com/operator.payloads/pneuma/pneuma-windows.exe
+      payload: '#{operator.payloads}/pneuma/pneuma-windows.exe'
