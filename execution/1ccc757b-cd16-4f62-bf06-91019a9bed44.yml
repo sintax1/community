@@ -14,5 +14,5 @@ metadata:
   authors:
     - bfuzzy1
   tags:
-    - HAFNIUM
-  version: 1
+    - hafnium
+  version: 2
