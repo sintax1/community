@@ -2,10 +2,11 @@ id: 47d08617-5ce1-424a-8cc5-c9c978ce6bf9
 metadata:
   version: 1
   authors:
-    - privateducky
-    - MITRE
+  - privateducky
+  - MITRE
   tags:
-    - Ransomware
+  - Ransomware
+  release_date: 2021-06-01
 name: Leave note
 description: |
   Part of a ransomware attack includes leaving a note on a machine to give the user instructions on how to pay the
