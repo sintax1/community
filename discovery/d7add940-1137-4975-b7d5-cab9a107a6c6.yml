@@ -4,12 +4,13 @@ description: Retrieve local group information on the target system.
 metadata:
   version: 3
   authors:
-    - w0rk3r
+  - w0rk3r
   tags: []
+  release_date: 2021-06-03
 tactic: discovery
 technique:
   id: T1069.001
-  name: "Permission Groups Discovery: Local Groups"
+  name: 'Permission Groups Discovery: Local Groups'
 platforms:
   windows:
     psh:
@@ -30,5 +31,5 @@ platforms:
         net localgroup
   linux:
     sh:
-      command: |
+      command: |-
         groups
