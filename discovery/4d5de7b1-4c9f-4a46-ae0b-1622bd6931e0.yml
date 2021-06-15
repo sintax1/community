@@ -1,0 +1,21 @@
+id: 4d5de7b1-4c9f-4a46-ae0b-1622bd6931e0
+name: Retrieve AWS Instance identity document
+description: AWS instances have a link-local address that return various types of metadata. This endpoint returns a JSON containing instance attributes, such as instance-id, private IP address, etc.
+metadata:
+  version: 1
+  authors:
+    - w0rk3r
+  tags: []
+tactic: discovery
+technique:
+  id: T1082
+  name: "System Information Discovery"
+platforms:
+  windows:
+    psh:
+      command: |
+        Invoke-RestMethod -Uri http://169.254.169.254/latest/dynamic/instance-identity/document
+  linux:
+    sh:
+      command: |
+        curl http://169.254.169.254/latest/dynamic/instance-identity/document
