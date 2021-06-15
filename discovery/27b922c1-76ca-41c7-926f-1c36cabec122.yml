@@ -1,21 +1,23 @@
 id: 27b922c1-76ca-41c7-926f-1c36cabec122
 name: Find Kerberoastable Accounts
-description: Find Active Directory user accounts with defined SPNs. These might be vulnerable to Kerberoasting
+description: Find Active Directory user accounts with defined SPNs. These might be
+  vulnerable to Kerberoasting
 metadata:
   version: 1
   authors:
-    - w0rk3r
+  - w0rk3r
   tags: []
+  release_date: 2021-06-15
 tactic: discovery
 technique:
   id: T1087.002
-  name: "Account Discovery: Domain Account"
+  name: 'Account Discovery: Domain Account'
 platforms:
   windows:
     cmd:
       command: setspn.exe -Q */*
       variants:
-        - command: setspn.exe -T #{domain.T1018} -Q */*
+      - command: setspn.exe -T   #{domain.T1018} -Q */*
     psh:
       command: |
         $searcher = New-Object System.DirectoryServices.DirectorySearcher
@@ -37,4 +39,5 @@ platforms:
         }
         $Final | ConvertTo-Json
       variants:
-        - command: Get-ADUser -Properties ServicePrincipalNames |Select-Object -ExpandProperty ServicePrincipalNames
+      - command: Get-ADUser -Properties ServicePrincipalNames |Select-Object -ExpandProperty
+          ServicePrincipalNames
