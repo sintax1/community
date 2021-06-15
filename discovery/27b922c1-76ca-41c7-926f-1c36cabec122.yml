@@ -1,0 +1,40 @@
+id: 27b922c1-76ca-41c7-926f-1c36cabec122
+name: Find Kerberoastable Accounts
+description: Find Active Directory user accounts with defined SPNs. These might be vulnerable to Kerberoasting
+metadata:
+  version: 1
+  authors:
+    - w0rk3r
+  tags: []
+tactic: discovery
+technique:
+  id: T1087.002
+  name: "Account Discovery: Domain Account"
+platforms:
+  windows:
+    cmd:
+      command: setspn.exe -Q */*
+      variants:
+        - command: setspn.exe -T #{domain.T1018} -Q */*
+    psh:
+      command: |
+        $searcher = New-Object System.DirectoryServices.DirectorySearcher
+        $searcher.Filter = "(&(!objectClass=computer)(servicePrincipalName=*))"
+        $ObjectProperties = @{}
+        $Final = @()
+        $searcher.PropertiesToLoad.Add("serviceprincipalname") | Out-Null
+        $searcher.PropertiesToLoad.Add("name") | Out-Null
+        $searcher.PropertiesToLoad.Add("samaccountname") | Out-Null
+        $searcher.PropertiesToLoad.Add("memberof") | Out-Null
+        $searcher.PropertiesToLoad.Add("pwdlastset") | Out-Null
+        $Results = $searcher.FindAll()
+        $Results | Where-Object {$_} | ForEach-Object {
+          $Properties = $_.Properties
+          $Properties.PropertyNames | ForEach-Object {            
+            $ObjectProperties[$_] = $Properties[$_][0]
+          }
+          $Final += $ObjectProperties
+        }
+        $Final | ConvertTo-Json
+      variants:
+        - command: Get-ADUser -Properties ServicePrincipalNames |Select-Object -ExpandProperty ServicePrincipalNames
