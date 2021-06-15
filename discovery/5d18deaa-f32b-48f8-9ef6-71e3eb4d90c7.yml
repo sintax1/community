@@ -4,13 +4,13 @@ description: Displays a list of currently cached Kerberos tickets
 metadata:
   version: 1
   authors:
-    - w0rk3r
+  - w0rk3r
   tags: []
   release_date: 2021-06-15
 tactic: discovery
 technique:
   id: T1049
-  name: "System Network Connections Discovery"
+  name: System Network Connections Discovery
 platforms:
   windows:
     psh:

