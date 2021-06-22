@@ -7,7 +7,7 @@ metadata:
   authors:
   - w0rk3r
   tags: []
-  release_date: 2021-06-15
+  release_date: 2021-06-22
 tactic: credential-access
 technique:
   id: T1558.003
