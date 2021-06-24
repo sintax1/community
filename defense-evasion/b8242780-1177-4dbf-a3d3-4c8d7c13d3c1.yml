@@ -6,18 +6,19 @@ description: |
 metadata:
   version: 1
   authors:
-    - w0rk3r
-  tags: 
-    - destructive
+  - w0rk3r
+  tags:
+  - destructive
+  release_date: 2021-06-24
 tactic: defense-evasion
 technique:
   id: T1562.001
-  name: "Impair Defenses: Disable or Modify Tools"
+  name: 'Impair Defenses: Disable or Modify Tools'
 platforms:
   windows:
     psh:
       command: |
         Add-MpPreference -ExclusionPath "#{directory.exclusion}"
     cmd:
-      command: |
+      command: |-
         wmic /Namespace:"\\root\Microsoft\Windows\Defender" class MSFT_MpPreference call Add ExclusionPath="#{directory.exclusion}"
