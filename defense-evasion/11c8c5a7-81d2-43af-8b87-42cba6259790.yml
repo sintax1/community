@@ -7,8 +7,9 @@ metadata:
   version: 1
   authors:
   - w0rk3r
-  tags: 
-    - destructive
+  tags:
+  - destructive
+  release_date: 2021-06-24
 tactic: defense-evasion
 technique:
   id: T1562.002
@@ -16,5 +17,5 @@ technique:
 platforms:
   windows:
     psh:
-      command: |
+      command: |-
         Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\ModuleLogging" -Name "EnableModuleLogging" -Value 0
