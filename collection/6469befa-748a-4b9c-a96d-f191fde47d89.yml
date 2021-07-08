@@ -2,13 +2,14 @@ id: 6469befa-748a-4b9c-a96d-f191fde47d89
 metadata:
   version: 3
   authors:
-    - privateducky
-    - MITRE
-    - w0rk3r
+  - privateducky
+  - MITRE
+  - w0rk3r
   tags:
-    - Crown Jewels
+  - Crown Jewels
   chains:
-    - File Hunter
+  - File Hunter
+  release_date: 2021-07-08
 name: Create new directory
 description: |
   Creating a staging directory is often a precursor to copying files into it. Hackers will do this action in order to
@@ -34,5 +35,5 @@ platforms:
       command: |
         New-Item -Path "." -Name "staged" -ItemType "directory" -Force | foreach {$_.FullName} | Select-Object
       variants:
-        - command: |
-            [System.IO.Directory]::CreateDirectory("staged");
+      - command: |-
+          [System.IO.Directory]::CreateDirectory("staged");

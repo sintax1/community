@@ -2,12 +2,13 @@ id: 300157e5-f4ad-4569-b533-9d1fa0e74d74
 metadata:
   version: 1
   authors:
-    - privateducky
-    - MITRE
+  - privateducky
+  - MITRE
   tags:
-    - Crown Jewels
+  - Crown Jewels
   chains:
-    - File Hunter
+  - File Hunter
+  release_date: 2021-07-08
 name: Compress staged directory
 description: |
   Compressing a directory has many purposes, mainly making the contents smaller and condensing them to a single file.
@@ -28,6 +29,6 @@ platforms:
         tar -P -zcf #{directory.T1074}.tar.gz #{directory.T1074} && echo #{directory.T1074}.tar.gz
   windows:
     psh:
-      command: |
+      command: |-
         Compress-Archive -Path #{directory.T1074} -DestinationPath #{directory.T1074}.zip -Force;
         sleep 1; ls #{directory.T1074}.zip | foreach {$_.FullName} | select

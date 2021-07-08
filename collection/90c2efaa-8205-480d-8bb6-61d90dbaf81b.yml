@@ -2,13 +2,14 @@ id: 90c2efaa-8205-480d-8bb6-61d90dbaf81b
 metadata:
   version: 1
   authors:
-    - privateducky
-    - MITRE
+  - privateducky
+  - MITRE
   tags:
-    - Crown Jewels
-    - Ransomware
+  - Crown Jewels
+  - Ransomware
   chains:
-    - File Hunter
+  - File Hunter
+  release_date: 2021-07-08
 name: Find recent files
 description: |
   Locate files modified in the last 24 hours. Recently modified files typically mean they carry some significance and
@@ -29,4 +30,5 @@ platforms:
   windows:
     psh:
       command: >
-        (Get-ChildItem -Path $env:USERPROFILE\Desktop,$env:USERPROFILE\Documents -recurse | ? {-not $_.PSIsContainer -and $_.LastWriteTime -gt (Get-Date).AddDays(-1)}).FullName
+        (Get-ChildItem -Path $env:USERPROFILE\Desktop,$env:USERPROFILE\Documents -recurse
+        | ? {-not $_.PSIsContainer -and $_.LastWriteTime -gt (Get-Date).AddDays(-1)}).FullName
