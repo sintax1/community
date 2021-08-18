@@ -2,13 +2,14 @@ id: 5c4dd985-89e3-4590-9b57-71fed66ff4e2
 metadata:
   version: 2
   authors:
-    - privateducky
-    - MITRE
-    - w0rk3r
+  - privateducky
+  - MITRE
+  - w0rk3r
   tags:
   - Conti
   chains:
   - Conti (Discovery)
+  release_date: 2021-08-18
 name: Permission Groups Discovery
 description: |
   Computer users are put into groups, which control their security access on the computer. Identifying which groups

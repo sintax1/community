@@ -13,18 +13,19 @@ platforms:
       command: |
         nltest /dsgetdc:%USERDOMAIN%
       variants:
-        - command: nltest /dclist:#{domain.T1016}
+      - command: nltest /dclist:#{domain.T1016}
     psh:
       command: |
         ([System.DirectoryServices.ActiveDirectory.Domain]::GetCurrentDomain()).DomainControllers
 metadata:
   version: 4
   authors:
-    - privateducky
-    - MITRE
-    - w0rk3r
-    - bfuzzy1
+  - privateducky
+  - MITRE
+  - w0rk3r
+  - bfuzzy1
   tags:
-    - hafnium
+  - hafnium
   chains:
   - Conti (Discovery)
+  release_date: 2021-08-18
