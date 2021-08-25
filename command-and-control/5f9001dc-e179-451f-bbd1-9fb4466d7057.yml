@@ -6,7 +6,7 @@ metadata:
   tags: []
   chains:
   - JXA access
-  release_date: 2021-08-24
+  release_date: 2021-08-25
 name: Download pneuma
 description: |
   Pneuma is an open-source agent which accompanies the Prelude platform. This procedure downloads the agent to disk
@@ -22,8 +22,8 @@ platforms:
       payload: '#{operator.payloads}/pneuma/pneuma-linux'
   darwin:
     sh:
-      command: nohup ./pneuma-darwin -address "http://#{operator.http}" -contact http >/dev/null
-        2>&1 &
+      command: nohup ./pneuma-darwin -address "http://#{operator.http}" -contact http
+        >/dev/null 2>&1 &
       payload: '#{operator.payloads}/pneuma/pneuma-darwin'
   windows:
     psh:

