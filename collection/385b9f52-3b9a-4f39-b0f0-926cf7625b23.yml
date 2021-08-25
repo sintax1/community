@@ -2,9 +2,10 @@ id: 385b9f52-3b9a-4f39-b0f0-926cf7625b23
 metadata:
   version: 1
   authors:
-    - privateducky
+  - privateducky
   tags:
-    - Crown Jewels
+  - Crown Jewels
+  release_date: 2021-08-25
 name: Find files on removable media
 description: |
   Devices, such as USB drives, often hold important documents, as they've been intentionally copied to the drive at some
@@ -16,5 +17,5 @@ technique:
 platforms:
   windows:
     psh:
-      command: |
+      command: |-
         gwmi win32_logicaldisk | Select -property drivetype, deviceid | Foreach-Object -process {if ($_.drivetype -eq 2 -OR $_.drivetype -eq 3 -AND $_.deviceid -ne $env:SystemDrive) {cd $_.deviceid ; Get-ChildItem -Recurse -Include *. | foreach {$_.FullName}; cd C:}};
