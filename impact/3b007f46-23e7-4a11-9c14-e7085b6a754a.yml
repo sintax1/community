@@ -2,9 +2,10 @@ id: 3b007f46-23e7-4a11-9c14-e7085b6a754a
 metadata:
   version: 1
   authors:
-    - privateducky
-    - MITRE
+  - privateducky
+  - MITRE
   tags: []
+  release_date: 2021-09-01
 name: Quit application
 description: |
   This procedure immediately halts the an installed application, force closing it
