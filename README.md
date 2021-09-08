@@ -72,6 +72,8 @@ Discoverable facts are those you anticipate a Prelude agent to find on its own.
 * **ssh**: an ssh connection command
 * **ip**: an ipv4 address
 * **domain**: a valid domain and top-level domain (google.com)
+* **password**: look for XML-style tags matching <password></password>
+* **json**: JSON blob parser, formated at `json.TXXX.flat.keys`
 
 When using discoverable variables inside commands, remember to place a dot separator with the technique ID you want the replaced
 variable (fact) to come from. For example, the following variable will be replaced with each file found by running
