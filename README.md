@@ -93,8 +93,10 @@ Automatic facts are environmental and are applied to an agent based on condition
 * **operator.http**: callback address of your HTTP server
 * **operator.tcp**: callback address of your TCP server
 * **operator.udp**: callback address of your UDP server
+* **operator.tcp_shell**: callback address of your TCP reverse shell handler
 * **agent.name**: current name given to the agent
 * **agent.location**: absolute file path of the agent file on disk
+* **agent.range**: agent's current range assignment inside Operator
 
 ### Custom variables
 
