@@ -74,4 +74,5 @@ ctf:
     platforms: 
       - linux
   payloads:
-    vulnerable.sh: {}
+    vulnerable.sh:
+      install: curl PAYLOAD.URL > tmp/vulnerable.sh && chmod +x /tmp/vulnerable.sh && sudo ./vulnerable.sh
