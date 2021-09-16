@@ -1,7 +1,8 @@
 translators:
   metadata:
-    description: An extra Operator listening post
-    build: build.sh
+    description: Extra Operator listening posts for redirectors
+    build: |
+      tar zcf DST.PATH/ftp.tar.gz SRC.PATH/ftp && tar zcf DST.PATH/grpc.tar.gz SRC.PATH/grpc
   payloads:
     ftp.tar.gz:
       install: |
@@ -21,7 +22,10 @@ translators:
 pneuma:
   metadata:
     description: The default open-source agent written in GoLang
-    build: build.sh
+    build: |
+      GOOS=darwin go build -ldflags="-s -w -X main.randomHash=$(openssl rand -base64 16)" -o DST.PATH/pneuma-darwin SRC.PATH/main.go && \
+      GOOS=linux go build -ldflags="-s -w -X main.randomHash=$(openssl rand -base64 16)" -o DST.PATH/pneuma-linux SRC.PATH/main.go && \
+      GOOS=windows go build -ldflags="-s -w -X main.randomHash=$(openssl rand -base64 16)" -o DST.PATH/pneuma-windows.exe SRC.PATH/main.go
     platforms:
       - linux
       - windows
@@ -49,6 +53,8 @@ pneuma:
 schism:
   metadata:
     description: Simple FTP agent (requires a translator)
+    build: |
+      cp SRC.PATH/schism.py DST.PATH
     platforms: 
       - windows
       - linux
@@ -63,6 +69,8 @@ schism:
 ctf:
   metadata:
     description: Create a vulnerable environment to practice against
+    build: |
+      cp SRC.PATH/vulnerable.sh DST.PATH
     platforms: 
       - linux
   payloads:
