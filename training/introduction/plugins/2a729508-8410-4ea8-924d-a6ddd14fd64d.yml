@@ -21,12 +21,8 @@ hints:
   - Have you read the documentation on plugins?
 blocks:
   Cloud plugin: |
-    The Cloud plugin offers 3 functions: deploying redirectors so agents can reach your Operator instance over the
-    internet, deploying test computers for you to practice attacks on, deploying full test ranges with
-    open-source SIEM products to test your analytics on.
-  Agent Library plugin: |
-    The Agent Library plugin lists the types of agents you can deploy against your targets. Agents can be written
-    in any computer language and Operator offers a few out-of-the-box for you to use.
+    The Cloud plugin offers 2 functions: deploying redirectors so agents can reach your Operator instance over the
+    internet and deploying test computers for you to practice attacks on.
   ART plugin: |
     The Atomic Red Team (ART) plugin provides a quick import of all attack files from the popular ART repository.
     Simply clone the popular Red Canary project (https://github.com/redcanaryco/atomic-red-team) and enter your directory
@@ -45,6 +41,10 @@ blocks:
   SIEM plugin: |
     The SIEM plugin connects to your Splunk SIEM and supplies an interface to verify if your saved queries (analytics)
     are working or not. Use this plugin to quickly write new analytics and launch adversaries to test them.
+  Toolbox plugin: |
+    Your toolbox contains all the utilities you use on a regular basis. Operator will keep these tools updated
+    so no need to manually pull latest code. Just enter the address of any tool you want to track and Operator
+    will clone it into your toolbox and keep it updated. This plugin requires that GIT be installed on this computer.
 answer:
   script: Basic.exists(Settings.settings.local.workspace+'/plugins'+'/Cloud/Cloud.html') && $('#answer').val().toLowerCase()
   value: translators/ftp.tar.gz
