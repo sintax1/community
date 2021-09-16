@@ -16,15 +16,12 @@ hints:
   - Look at both online and offline users
   - Check the docs
 blocks:
-  Help button: |
-    Prelude provides aid through immediate assistance for Professional license holders with the help button. The
-    support team will reply promptly and offer in-depth help for services within Operator.
   Prelude blog: |
     If you want to learn how to become a better cyber user or are looking for more information on the tools in Operator,
     consider taking a look at the official Prelude blog! There are a collection of in-depth articles written by the team
     in efforts to better break down and provide material for you to learn more about the cyber security and red teaming field.
   Community Repository: |
-    The Community Repository has dozens of TTPs, organized by ATT&CK tactics. This repository
+    The Community Repository includes dozens of TTPs, organized by ATT&CK tactics. This repository
     gets new additions consistently and contributions are welcomed. Shortly after new TTPs get merged into Community,
     they will appear here, in the desktop application, ready to be used.
   Discord Server: |
