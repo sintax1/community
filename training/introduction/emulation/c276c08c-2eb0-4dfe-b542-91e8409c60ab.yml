@@ -54,6 +54,10 @@ blocks:
     has a different file hash. This way, if defensive teams find an instance of Pneuma on a computer - and flag the MD5
     file hash as malicious, no other agents running in their network will be caught. Note: this is not the same as the
     encryptionKey.
+  Pneuma: |
+    Pneuma is the default Operator agent, written in GoLang, and pre-compiled for all major operating systems. You
+    can download a copy of the agent from the Operate section (look for the agent icon in the dock). Run the agent
+    with the -help parameter for more information.
 answer:
   script: Number(Agent.agents.filter(function (a) { return a.key != 'abcdefghijklmnopqrstuvwxyz012345' }).length > 0)
   value: 1
