@@ -16,9 +16,9 @@ template:
   data: []
 resources:
   links:
-    Prelude: https://prelude.org
+    GitHub: https://github.com/preludeorg
 hints:
-  - Head to prelude.org and look around
+  - Head to Prelude GitHub account and look around
 blocks:
   Scheduling: |
     If you don't want to rely on the randomly selected micro adversaries, you can build your own custom adversary profiles
@@ -31,7 +31,7 @@ blocks:
     to hop into an Integrated Development Environment (IDE) for building individual TTPs. Here, you can also edit and manipulate
     any existing TTPs. This is meant to be your database of attacks.
   Reverse shell: |
-    Go fully human-in-the-loop by opening a reverse-shell to any connected agent. This allows you to run any arbitrary
+    Go fully human-in-the-loop by opening a reverse-shell to any TCP-connected agent. This allows you to run any arbitrary
     shell command.
 answer:
   script: $('#answer').val().toLowerCase()

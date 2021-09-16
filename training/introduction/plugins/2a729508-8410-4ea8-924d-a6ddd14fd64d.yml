@@ -1,6 +1,6 @@
 id: 2a729508-8410-4ea8-924d-a6ddd14fd64d
 name: Understanding plugins
-challenge: Install the Agent Library plugin and enter the name of the default agent
+challenge: Install the Cloud plugin and enter the name of an available translator payload
 context: |
   A plugin in Operator is an HTML file, containing valid JavaScript and CSS components. Plugins allow you to extend
   or override various components within Operator, putting you in full control of the system. Cyber security engineers -
@@ -15,6 +15,7 @@ template:
 resources:
   links:
     Cloud plugin: https://feed.prelude.org/p/cloudy-with-a-chance-of-redirectors
+    Translators: https://feed.prelude.org/p/can-you-hear-me-now
 hints:
   - Have you read the documentation on plugins?
 blocks:
