@@ -28,9 +28,9 @@ blocks:
     by larger enterprises or governments. Our goal is that you can use your new skills to secure your organization.
   What is login.prelude.org? : |
     The Operator platform leverages login.prelude.org as an authentication server and content provider. We call this server
-    GateKeeper. Aside from verifying your login info, GateKeeper supplies all training modules and keeps your TTP
+    Headquarters. Aside from verifying your login info, Headquarters supplies all training modules and keeps your TTP
     database up-to-date by automatically pulling down TTPs from the Community and Professional repositories. Within
-    the GateKeeper UI, you can manage several personal details, such as your profile and what organizations you belong to.
+    the Headquarters UI, you can manage several personal details, such as your profile and what organizations you belong to.
   What should I expect?: |
     Each week, you will face multiple challenges in a capture-the-flag style. You will need to prove your knowledge by
     "capturing" each flag. Some will be easy, and test your reading comprehension, others will be difficult and will

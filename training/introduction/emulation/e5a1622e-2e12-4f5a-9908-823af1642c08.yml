@@ -17,7 +17,7 @@ resources:
     Mimicking evil: https://feed.prelude.org/p/mimicking-evil
 hints:
   - Chain clusters are groups of chains by technique. Click into each cluster and count the number of chains.
-  - The GateKeeper API can also be used to view adversary chains via the /protect endpoint
+  - The Headquarters API can also be used to view adversary chains via the /protect endpoint
 blocks:
   What is a malicious chain?: |
     Operator also includes a concept we call malicious chains. These chains are pre-determined sequences of ATT&CK
