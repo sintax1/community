@@ -23,9 +23,9 @@ pneuma:
   metadata:
     description: The default open-source agent written in GoLang
     build: |
-      GOOS=darwin go build -ldflags="-s -w -X main.randomHash=123" -o DST.PATH/pneuma-darwin SRC.PATH/main.go && \
-      GOOS=linux go build -ldflags="-s -w -X main.randomHash=456" -o DST.PATH/pneuma-linux SRC.PATH/main.go && \
-      GOOS=windows go build -ldflags="-s -w -X main.randomHash=789" -o DST.PATH/pneuma-windows.exe SRC.PATH/main.go
+      GOOS=darwin go build -ldflags="-s -w -X main.randomHash=$(openssl rand -base64 16)" -o DST.PATH/pneuma-darwin SRC.PATH/main.go && \
+      GOOS=linux go build -ldflags="-s -w -X main.randomHash=$(openssl rand -base64 16)" -o DST.PATH/pneuma-linux SRC.PATH/main.go && \
+      GOOS=windows go build -ldflags="-s -w -X main.randomHash=$(openssl rand -base64 16)" -o DST.PATH/pneuma-windows.exe SRC.PATH/main.go
     platforms:
       - linux
       - windows
