@@ -2,7 +2,11 @@
     <div class="body">
         <strong class="profile-heading">Cloud provisioning</strong>
         <p>
-            Deploy new redirector gateways to accept beacons over the internet or compromised servers in the cloud.
+            Traditionally, red teams have used socat/netcat to proxy beacons from the internet to their desktop. These 
+            are known as gateway/redirector servers. This plugin replicates this behavior by provisioning
+            new gateway servers (micro Linux instances) in your own cloud environment. You can also choose to provision 
+            a new Linux or Windows server, which will include a running Pneuma agent pointed to any redirector, giving you
+            a quick practice environment.
         </p>
     </div>
 </div>
@@ -22,7 +26,12 @@
         <div id="aws-tools" class="profile-heading-container" style="background: #111; border-radius: 4px; margin: 10px 0;opacity:0.9;">
             <div class="body" style="margin-bottom: 10px;">
                 <strong class="profile-heading">Payloads</strong>
-                <p>Select the payloads you want installed as soon as the host becomes available.</p>
+                <p>
+                    Enable any payload below to pre-install it on your deployed server. This allows you to customize the environment, either by 
+                    creating a unique test lab or installing redirector tools, such as 
+                    <a href="https://feed.prelude.org/p/cloudy-with-a-chance-of-redirectors">Switchboard</a> for team management, or 
+                    <a href="https://feed.prelude.org/p/can-you-hear-me-now">translators</a>, which start listening posts for new network protocols.
+                </p>
             </div>
             <div id="aws-tools-listing"></div>
         </div>
@@ -356,8 +365,11 @@
 
             if (ev.target.value === 'gateway') {
                 $('#aws #range-configs').hide();
+            } else {
+                $('#aws #range-configs').show();
+            }
 
-                Requests.fetchGatekeeper(Basic.constructEndpoint('/payloads', {
+            Requests.fetchGatekeeper(Basic.constructEndpoint('/payloads', {
                     email: settings.account.email,
                     token: settings.account.token
                 }), {
@@ -375,10 +387,6 @@
                         $('#aws-tools').find('#aws-tools-listing').append(tool);
                     });
                 });
-
-            } else {
-                $('#aws #range-configs').show();
-            }
         });
 
         function setCloudConfigFields(config) {
