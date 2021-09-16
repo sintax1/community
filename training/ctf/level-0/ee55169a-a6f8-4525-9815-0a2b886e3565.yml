@@ -16,7 +16,7 @@ hints:
 blocks:
   How to create the level: |
     Go to the Cloud plugin and deploy a new redirector, ensuring it is enabled.
-    Then deploy a new Linux machine with the CTF-LEVEL-0A tool installed.
+    Then deploy a new Linux machine with the vulnerable.sh payload installed.
 answer:
   script: $('#answer').val().toLowerCase()
   value: bunny

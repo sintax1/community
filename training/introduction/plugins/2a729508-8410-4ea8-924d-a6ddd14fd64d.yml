@@ -1,6 +1,6 @@
 id: 2a729508-8410-4ea8-924d-a6ddd14fd64d
 name: Understanding plugins
-challenge: Install the Cloud plugin and enter the name of an available translator payload
+challenge: Install the Cloud plugin and enter the full payload name which will allow the Schism agent to connect to Operator.
 context: |
   A plugin in Operator is an HTML file, containing valid JavaScript and CSS components. Plugins allow you to extend
   or override various components within Operator, putting you in full control of the system. Cyber security engineers -
@@ -16,6 +16,7 @@ resources:
   links:
     Cloud plugin: https://feed.prelude.org/p/cloudy-with-a-chance-of-redirectors
     Translators: https://feed.prelude.org/p/can-you-hear-me-now
+    Schism: https://github.com/preludeorg/community/blob/master/payloads/src/schism/schism.py
 hints:
   - Have you read the documentation on plugins?
 blocks:
@@ -45,5 +46,5 @@ blocks:
     The SIEM plugin connects to your Splunk SIEM and supplies an interface to verify if your saved queries (analytics)
     are working or not. Use this plugin to quickly write new analytics and launch adversaries to test them.
 answer:
-  script: Basic.exists(Settings.settings.local.workspace+'/plugins'+'/AgentLibrary/AgentLibrary.html') && $('#answer').val().toLowerCase()
-  value: pneuma
+  script: Basic.exists(Settings.settings.local.workspace+'/plugins'+'/Cloud/Cloud.html') && $('#answer').val().toLowerCase()
+  value: translators/ftp.tar.gz
