@@ -30,8 +30,7 @@
             <p>
                 Your toolbox contains all the utilities you use on a regular basis. Operator will keep these tools updated
                 so no need to manually pull latest code. Just enter the address of any tool you want to track and Operator
-                will clone it into your toolbox and keep it updated. Unsure where to start? <a id="starterKit">Install our starter kit</a>
-                to get bootstrapped. This plugin requires that GIT be installed on this computer.
+                will clone it into your toolbox and keep it updated. This plugin requires that GIT be installed on this computer.
             </p>
         </div>
     </div>
@@ -88,22 +87,6 @@
             $('#newTool').on('change', (ev) => {
                 $('#toolbox-container .loader').toggleClass('loading', true);
                 ingestTool(ev.target.value).then(() => {
-                    $('#toolbox-container .loader').toggleClass('loading', false);
-                });
-            });
-            $('#starterKit').on('click', (ev) => {
-                const kit = [
-                    {'tag':'agent', 'url':'https://github.com/preludeorg/pneuma'},
-                    {'tag':'ttp', 'url':'https://github.com/mitre/stockpile'},
-                    {'tag':'ttp', 'url':'https://github.com/redcanaryco/atomic-red-team.git'},
-                    {'tag':'exploit', 'url':'https://github.com/sqlmapproject/sqlmap.git'},
-                    {'tag':'recon', 'url':'https://github.com/nmap/nmap.git'},
-                    {'tag':'recon', 'url':'https://github.com/sullo/nikto.git'},
-                    {'tag':'recon', 'url':'https://github.com/trufflesecurity/truffleHog.git'},
-                    {'tag':'phishing', 'url':'https://github.com/curtbraz/PhishAPI.git'}
-                ]
-                $('#toolbox-container .loader').toggleClass('loading', true);
-                Promise.all(kit.map(repo => ingestTool(repo.url, repo.tag))).then(() => {
                     $('#toolbox-container .loader').toggleClass('loading', false);
                 });
             });
