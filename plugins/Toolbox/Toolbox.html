@@ -30,7 +30,8 @@
             <p>
                 Your toolbox contains all the utilities you use on a regular basis. Operator will keep these tools updated
                 so no need to manually pull latest code. Just enter the address of any tool you want to track and Operator
-                will clone it into your toolbox and keep it updated. This plugin requires that GIT be installed on this computer.
+                will clone it into your toolbox and keep it updated.  Unsure where to start? <a id="starterKit">Install our starter kit</a>
+                to get bootstrapped. This plugin requires that GIT be installed on this computer.
             </p>
         </div>
     </div>
@@ -67,7 +68,6 @@
 
 <script>
     Requests.fetchOperator('/internal/config/settings', {method: 'GET'}).then(res => res.json()).then(settings => {
-        const QUEUE = {};
         const TOOLBOX = path.join(settings.local.workspace, "plugins", "Toolbox", "tools");
         Basic.createStorage([TOOLBOX])
         
@@ -84,11 +84,27 @@
               document.body.removeChild(node);
               Basic.showNotification('Success', `${TOOLBOX} has been copied to your clipboard`);
             });
-            $('#newTool').on('change', (ev) => {
-                $('#toolbox-container .loader').toggleClass('loading', true);
-                ingestTool(ev.target.value).then(() => {
-                    $('#toolbox-container .loader').toggleClass('loading', false);
-                });
+            $('#newTool').keydown(ev => {
+                if (ev.keyCode == 13) {
+                    ev.target.blur();
+                }
+            }).on('blur', (ev) => {
+                if (ev.target.value) {
+                    ingestTool(ev.target.value);
+                }
+            });
+            $('#starterKit').on('click', (ev) => {
+                const kit = [
+                    {'tag':'agent', 'url':'https://github.com/preludeorg/pneuma'},
+                    {'tag':'ttp', 'url':'https://github.com/mitre/stockpile'},
+                    {'tag':'ttp', 'url':'https://github.com/redcanaryco/atomic-red-team.git'},
+                    {'tag':'exploit', 'url':'https://github.com/sqlmapproject/sqlmap.git'},
+                    {'tag':'recon', 'url':'https://github.com/nmap/nmap.git'},
+                    {'tag':'recon', 'url':'https://github.com/sullo/nikto.git'},
+                    {'tag':'recon', 'url':'https://github.com/trufflesecurity/truffleHog.git'},
+                    {'tag':'phishing', 'url':'https://github.com/curtbraz/PhishAPI.git'}
+                ]
+                kit.map(repo => ingestTool(repo.url, repo.tag));
             });
             displayTools();
         });
@@ -125,8 +141,13 @@
             })
         }
 
+        const SYNCHRONIZED = {
+            current: Promise.resolve(true)
+        };
+
         function ingestTool(url, tag='unknown'){
-            return new Promise((resolve, reject) => {
+            SYNCHRONIZED.current = SYNCHRONIZED.current.then(() => new Promise((resolve, reject) => {
+                $('#toolbox-container .loader').toggleClass('loading', true);
                 if(url){
                     exec(`git clone ${url} --recursive`, {cwd: path.join(TOOLBOX, "")}, (error, stdout, stderr) => {
                         if (error) {
@@ -134,28 +155,33 @@
                             resolve();
                             return;
                         }
+
                         const name = url.split('/').pop().split('.')[0];
-                        QUEUE[name] = {'url':url, 'tag':tag};
                         Requests.fetchOperator('/plugin/Toolbox', {
                             method: 'GET'
                         }).then(res => res.json()).then(res => {
-                            const tools = Object.assign({}, res.tools, QUEUE);
                             return Requests.fetchOperator('/plugin/Toolbox', {
                                 method: 'POST',
                                 body: JSON.stringify({
                                     ...res,
-                                    tools: tools
+                                    tools: {
+                                        ...res.tools,
+                                        [name]: {
+                                            url: url,
+                                            tag: tag
+                                        }
+                                    }
                                 })
                             }).then(res => {
-                                delete QUEUE[name];
                                 displayTools();
                             });
                         }).then(resolve);
-                        Basic.showNotification('Successful download', `${name} is now ready to use`);
                     });
                 } else {
                     resolve();
                 }
+            })).then(() => {
+                $('#toolbox-container .loader').toggleClass('loading', false);
             });
         }
 
