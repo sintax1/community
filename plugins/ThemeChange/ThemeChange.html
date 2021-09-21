@@ -1,12 +1,7 @@
 <div class="profile-heading-container">
     <div class="body">
         <strong class="profile-heading">Adjust the theme</strong>
-        <p>Change between light and dark mode or apply a custom theme. Custom themes only apply to the main Operate section.</p>
-        <label>
-            <input id="theme-background" placeholder="Enter a URL to a background image" onchange="saveBackground()"/>
-        </label>
-        <br><br>
-        <button onclick="resetBackground()">Reset background</button>
+        <p>Change between light and dark mode.</p>
         <br>
         <button onclick="toggle_mode()">Toggle mode</button>
     </div>
@@ -16,9 +11,6 @@
         Requests.fetchOperator('/plugin/ThemeChange', {
             method: 'GET'
         }).then(res => res.json()).then(config => {
-            if(config.background) {
-                $('<style>.welcome-theme { background-image: url("'+config.background+'");background-size:cover;background-repeat:no-repeat;}</style>').appendTo('body');
-            }
             if(config.inverted){
                 document.querySelector('body').classList.add('inverted');
             }
@@ -26,25 +18,6 @@
     </script>
 </div>
 <script>
-    function saveBackground(){
-        Requests.fetchOperator('/plugin/ThemeChange', {
-            method: 'GET'
-        }).then(res => res.json()).then(config => {
-            config.background = $('#theme-background').val();
-            Requests.fetchOperator('/plugin/ThemeChange', {
-                method: 'POST',
-                body: JSON.stringify(config)
-            }).then(() => {
-                $('<style>.welcome-theme { background-image: url("'+config.background+'");background-size:cover;background-repeat:no-repeat;}</style>').appendTo('body');
-            });
-        });
-    }
-
-    function resetBackground() {
-        $('<style>.welcome-theme { background-color:initial;background-size:cover;background-repeat:no-repeat;}</style>').appendTo('body');
-        $('<style>.welcome-theme { background-image:initial;background-size:cover;background-repeat:no-repeat;}</style>').appendTo('body');
-    }
-
     function toggle_mode() {
         Requests.fetchOperator('/plugin/ThemeChange', {
             method: 'GET'
