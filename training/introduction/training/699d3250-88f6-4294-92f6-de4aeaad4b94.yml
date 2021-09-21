@@ -13,8 +13,7 @@ template:
   name: submit
   data: []
 resources: {}
-hints:
-  - Head to chains.prelude.org and look around
+hints: []
 blocks:
   Click the grey dots!: |
     Every time you load a course, you'll automatically be presented with the next challenge

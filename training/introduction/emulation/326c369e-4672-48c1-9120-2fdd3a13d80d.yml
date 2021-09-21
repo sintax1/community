@@ -21,7 +21,7 @@ resources:
     Chains: https://chains.prelude.org
     CALDERA: https://github.com/mitre/caldera
 hints:
-  - 
+  - Head to chains.prelude.org and look around
 blocks:
   CALDERA: |
     The CALDERA framework is an open-source C2 framework, supported by the MITRE Corporation, to conduct research in 
