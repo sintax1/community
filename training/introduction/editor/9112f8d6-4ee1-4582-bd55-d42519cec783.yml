@@ -1,0 +1,24 @@
+id: 9112f8d6-4ee1-4582-bd55-d42519cec783
+name: Create a new payload
+challenge: |
+  Can you create a new payload? It should be named "hello.txt" and its contents should be "world". You can attach it
+  to any TTP you like.
+context: |
+  You can use Operator to edit and attach payloads directly to TTPs. Select a TTP then look for the "Add a Payload"
+  text at the bottom of your editor. When you click on it, you'll be able to add an existing payload (either by
+  browsing to it after clicking the upload button, or by dragging it directly onto the payload editor window),
+  or create a new one from scratch by giving it a new file name and entering it's contents directly.
+template:
+  name: submit
+  data: []
+resources:
+  links: []
+hints:
+  - Look for the "Add a Payload" link at the bottom of the Editor window
+blocks:
+  How Payloads Work: |
+    Each TTP can offload part of its execution to an external attachment that will get automatically downloaded
+    before the TTP runs.
+answer:
+  script: Listen.resolvePayloads("/uploads/hello.txt").filter(p => Encryption.decryptBuffer(fs.readFileSync(p)).toString() == "world").length
+  value: 1
