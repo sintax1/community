@@ -1,7 +1,7 @@
 id: 9112f8d6-4ee1-4582-bd55-d42519cec783
 name: Create a new payload
 challenge: |
-  Can you create a new Payload? It should be named "hello.txt" and it's contents should be "world". You can attach it
+  Can you create a new payload? It should be named "hello.txt" and its contents should be "world". You can attach it
   to any TTP you like.
 context: |
   You can use Operator to edit and attach payloads directly to TTPs. Select a TTP then look for the "Add a Payload"
@@ -18,7 +18,7 @@ hints:
 blocks:
   How Payloads Work: |
     Each TTP can offload part of its execution to an external attachment that will get automatically downloaded
-    when the TTP runs.
+    before the TTP runs.
 answer:
   script: Listen.resolvePayloads("/uploads/hello.txt").filter(p => Encryption.decryptBuffer(fs.readFileSync(p)).toString() == "world").length
   value: 1
