@@ -1,24 +1,35 @@
+<style>
+  table#fact-table {
+    background: none;
+    border: none;
+    border-spacing: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+</style>
+
 <div class="profile-heading-container">
   <div class="body">
     <strong class="profile-heading">Manage your Atomic Red Team attacks</strong>
     <p>
       Atomic Red Team (ART) contains hundreds of TTPs which can be used to validate the defenses on a system or within
       a network. This plugin allows you to import these attacks into Operator and manage them as native TTPs. Importing them is a one time action.
-      Afterward, you can attach them to adversaries or work with them inside the Editor section, as if they were built-in Operator TTPs.
+      Afterward, you can adjust any of the global input_arguments, which are used as Operator facts.
     </p>
   </div>
 </div>
 
 <input placeholder="Enter a local directory of ART attack files" id="art" onchange="ingest('art')"/>
+<br>
+<button id="save-facts">Re-save input arguments</button>
+<br>
+<div>
+  <table id="fact-table">
+      <tbody></tbody>
+  </table>
+</div>
 
-<ul id="listing" class="horizontal-list"></ul>
-
-<li id="ttp-template" class="profile loader-container" style="padding-bottom: 20px; display:none">
-  <div class="description">
-    <h3 id="ttp-name" class="split"><span class="main"></span><span class="aux"></span></h3>
-    <p id="ttp-description"></p>
-  </div>
-</li>
 
 <div id="init-plugin">
   <script>
@@ -51,6 +62,25 @@
 
   let ART_FACTS = {};
 
+  $(function() {
+      $('#save-facts').click((ev) => {
+          ev.preventDefault();
+          ev.stopPropagation();
+          flushArtFacts();
+          alert('Saved!');
+      });
+
+      Requests.fetchOperator('/plugin/ART', {
+        method: 'GET'
+      }).then(res => res.json()).then(res => {
+        if(res.facts){
+          Object.keys(res.facts).forEach(name => {
+            display(name, res.facts[name]);
+          });
+        }
+      })
+  });
+
   function ingest(directory) {
       $("#listing").empty();
       new Promise((resolve, reject) => {
@@ -62,11 +92,11 @@
                             method: 'POST',
                             body: JSON.stringify(ttp)
                           });
-                          display(ttp);
                         })
                 )));
       });
       flushArtFacts();
+      Basic.showNotification('Complete', 'Your TTPs are now accessible in the Editor section');
   }
 
   function convertRedCanary(file) {
@@ -87,6 +117,7 @@
           const replacements = Object.keys(ttp?.input_arguments || {}).map(arg => {
             const key = `${data.attack_technique}.${idx}.${arg}`
             ART_FACTS[key] = ttp.input_arguments[arg].default;
+            display(key, ttp.input_arguments[arg].default);
             return [`#{${arg}}`, `#{${key}}`];
           });
           ttp.supported_platforms.forEach(p => {
@@ -141,12 +172,20 @@
     }, '');
   };
 
-  function display(ttp){
-    let template = $('#ttp-template').clone()
-    template.find('#ttp-name .main').text(ttp.name)
-    template.find('#ttp-description').text(ttp.description)
-    template.show()
-    $("#listing").append(template)
+  function display(key, value){
+      const row = $(`<tr>
+      <td><input id="fkey" spellcheck="false" value="${key}" /></td>
+      <td><input id="fval" spellcheck="false" value="${value}" /></td>
+      </tr>`).on('paste', 'p', (ev) => {
+          ev.preventDefault();
+          document.execCommand("insertHTML", false, ev.originalEvent.clipboardData.getData("text/plain"));
+      });
+      row.find('#fval').on("focusout", () => {
+          const key = row.find('#fkey').val().trim();
+          const value = row.find('#fval').val().trim();
+          ART_FACTS[key] = value;
+      });
+      $('#fact-table tbody').append(row);
   }
 
   function flushArtFacts(){
