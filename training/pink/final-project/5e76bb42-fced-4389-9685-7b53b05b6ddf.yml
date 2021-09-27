@@ -1,7 +1,7 @@
 id: 5e76bb42-fced-4389-9685-7b53b05b6ddf
 name: Your final project
 challenge: |
-  Install the Protect application and pass the first flag
+  Install the Protect application and pass the first challenge. Please re-enter the answer here.
 context: |
   Protect is a lightweight endpoint product that continously tests your cyber hygiene. It does this by running safe
   adversary attacks, monitoring how you react, and supplying you with quick training modules when you make a mistake.
@@ -30,5 +30,5 @@ blocks:
     Yes. Protect only runs safe commands. It will not run anything destructive nor will it send any results or sensitive
     data off your computer.
 answer:
-  script: Number(Program.programs['protect'].courses.filter(co => co.challenges.length > 0 && co.challenges.filter(ch => ch.completed).length === co.challenges.length).length > 0)
-  value: 1
+  script: $('#answer').val()
+  value: instructions.txt
