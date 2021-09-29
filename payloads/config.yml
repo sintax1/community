@@ -2,20 +2,20 @@ translators:
   metadata:
     description: Extra Operator listening posts for redirectors
     build: |
-      tar zcf DST.PATH/ftp.tar.gz SRC.PATH/ftp && tar zcf DST.PATH/grpc.tar.gz SRC.PATH/grpc
+      tar zcf DST.PATH/ftp.tar.gz -C SRC.PATH ftp && tar zcf DST.PATH/grpc.tar.gz -C SRC.PATH grpc
   payloads:
     ftp.tar.gz:
       install: |
         mkdir -p /tmp/translators && \
         curl 'PAYLOAD.URL' > /tmp/translators/ftp.tar.gz && \
-        tar zcf /tmp/translators/ftp.tar.gz /tmp/translators && \
+        tar xzf /tmp/translators/ftp.tar.gz -C /tmp/translators && \
         sudo pip3 install -r /tmp/translators/ftp/requirements.txt && \
         nohup sudo python3 /tmp/translators/ftp/server.py &
     grpc.tar.gz:
       install: |
         mkdir -p /tmp/translators && \
         curl 'PAYLOAD.URL' > /tmp/translators/grpc.tar.gz && \
-        tar zcf /tmp/translators/grpc.tar.gz /tmp/translators && \
+        tar xzf /tmp/translators/grpc.tar.gz -C /tmp/translators && \
         sudo pip3 install -r /tmp/translators/grpc/requirements.txt && \
         nohup sudo python3 /tmp/translators/grpc/server.py &
 
