@@ -1,9 +1,12 @@
 <div class="profile-heading-container">
     <div class="body">
         <strong class="profile-heading">Adjust the theme</strong>
-        <p>Change between light and dark mode.</p>
+        <p>Configure how your Operator instance looks</p>
         <br>
-        <button onclick="toggle_mode()">Toggle mode</button>
+        <h4>Alternatively override the <a href="https://github.com/preludeorg/community/tree/master/plugins/ThemeChange">Operator stylesheet</a> with your own</h4>
+        <input id="custom-styles" placeholder="Add the path to your custom app.css file" onchange="loadStyleSheet()"/>
+        <br><br>
+        <button onclick="toggleMode()">Toggle mode</button>
     </div>
 </div>
 <div id="init-plugin">
@@ -11,14 +14,17 @@
         Requests.fetchOperator('/plugin/ThemeChange', {
             method: 'GET'
         }).then(res => res.json()).then(config => {
-            if(config.inverted){
+            if(config.stylesheet){
+                $('#custom-styles').val(config.stylesheet);
+                $('head').append(`<link rel="stylesheet" type="text/css" href="${config.stylesheet}">`);
+            } else if(config.inverted){
                 document.querySelector('body').classList.add('inverted');
             }
-        });
+        })
     </script>
 </div>
 <script>
-    function toggle_mode() {
+    function toggleMode() {
         Requests.fetchOperator('/plugin/ThemeChange', {
             method: 'GET'
         }).then(res => res.json()).then(config => {
@@ -32,6 +38,24 @@
                     document.querySelector('body').classList.add('inverted');
                 } else {
                     document.querySelector('body').classList.remove('inverted');
+                }
+            });
+        });
+    }
+    
+    function loadStyleSheet(){
+        Requests.fetchOperator('/plugin/ThemeChange', {
+            method: 'GET'
+        }).then(res => res.json()).then(config => {
+            config.stylesheet = $('#custom-styles').val();
+            Requests.fetchOperator('/plugin/ThemeChange', {
+                method: 'POST',
+                body: JSON.stringify(config)
+            }).then(() => {
+                if(config.stylesheet){
+                    $('head').append(`<link rel="stylesheet" type="text/css" href="${$('#custom-styles').val()}">`);
+                } else {
+                    location.reload();
                 }
             });
         });
