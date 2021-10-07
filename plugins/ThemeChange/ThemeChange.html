@@ -53,10 +53,8 @@
                 method: 'POST',
                 body: JSON.stringify(config)
             }).then(() => {
-                console.log('removing: '+currentStylesheet)
                 $(`link[rel=stylesheet][href="${currentStylesheet}"]`).remove();
                 if(config.stylesheet){
-                    console.log('adding: '+config.stylesheet)
                     $('head').append(`<link rel="stylesheet" type="text/css" href="${config.stylesheet}">`);
                 } 
             });
