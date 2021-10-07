@@ -58,11 +58,7 @@
                 method: 'POST',
                 body: JSON.stringify(config)
             }).then(() => {
-                if(config.stylesheet){
-                    $('head').append(`<link rel="stylesheet" type="text/css" href="${$('#custom-styles').val()}">`);
-                } else {
-                    location.reload();
-                }
+                $('head').append(`<link rel="stylesheet" type="text/css" href="${config.stylesheet}">`);
             });
         });
     }
