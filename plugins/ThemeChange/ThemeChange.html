@@ -15,11 +15,11 @@
     <div class="input-wrapper">
         <select id="themes" onchange="loadTheme()">
             <option value="" selected>Default (dark)</option>
-            <option value="/home/privateducky/app.css">Light</option>
+            <option value="/home/privateducky/light.css">Light</option>
         </select>
     </div>
 </div>
-<input id="custom-styles" placeholder="Alternatively, if you have a custom app.css enter the absolute path below" onchange="loadStyleSheet()"/>
+<input id="custom-styles" placeholder="Alternatively, if you have a custom app.css enter the absolute path below" onchange="loadCustom()"/>
 
 <div id="init-plugin">
     <script>
@@ -36,39 +36,29 @@
 
 <script>
     function loadTheme() {
-        Requests.fetchOperator('/plugin/ThemeChange', {
-            method: 'GET'
-        }).then(res => res.json()).then(config => {
-            let currentStylesheet = config.stylesheet;
-            config.stylesheet = $('#themes').find(":selected").val();
-            Requests.fetchOperator('/plugin/ThemeChange', {
-                method: 'POST',
-                body: JSON.stringify(config)
-            }).then(() => {
-                if(config.stylesheet){
-                    $('head').append(`<link rel="stylesheet" type="text/css" href="${config.stylesheet}">`);
-                } else {
-                    $(`link[rel=stylesheet][href="${currentStylesheet}"]`).remove();
-                }
-            });
-        });
+        loadStyleSheet($('#themes').find(":selected").val());
     }
     
-    function loadStyleSheet(){
+    function loadCustom(){
+        loadStyleSheet($('#custom-styles').val());
+    }
+
+    function loadStyleSheet(sheet){
         Requests.fetchOperator('/plugin/ThemeChange', {
             method: 'GET'
         }).then(res => res.json()).then(config => {
             let currentStylesheet = config.stylesheet;
-            config.stylesheet = $('#custom-styles').val();
+            config.stylesheet = sheet;
             Requests.fetchOperator('/plugin/ThemeChange', {
                 method: 'POST',
                 body: JSON.stringify(config)
             }).then(() => {
+                console.log('removing: '+currentStylesheet)
+                $(`link[rel=stylesheet][href="${currentStylesheet}"]`).remove();
                 if(config.stylesheet){
+                    console.log('adding: '+config.stylesheet)
                     $('head').append(`<link rel="stylesheet" type="text/css" href="${config.stylesheet}">`);
-                } else {
-                    $(`link[rel=stylesheet][href="${currentStylesheet}"]`).remove();
-                }
+                } 
             });
         });
     }
