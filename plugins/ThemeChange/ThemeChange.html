@@ -49,7 +49,7 @@
         });
     }
     
-    function loadStyleSheet(css){
+    function loadStyleSheet(){
         Requests.fetchOperator('/plugin/ThemeChange', {
             method: 'GET'
         }).then(res => res.json()).then(config => {
