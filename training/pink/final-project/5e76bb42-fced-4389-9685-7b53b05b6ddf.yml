@@ -13,7 +13,7 @@ context: |
   (you can do other things). Then click the Prelude icon in your system tray to view the available training module.
   Pass this flag, then refresh Operator and verify you have completed Pink Badge.
 template:
-  name: submit
+  name: input
   data: []
 resources:
   audio:
