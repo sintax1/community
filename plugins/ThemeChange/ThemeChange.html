@@ -1,49 +1,55 @@
+
 <div class="profile-heading-container">
     <div class="body">
         <strong class="profile-heading">Adjust the theme</strong>
-        <p>Configure how your Operator instance looks</p>
-        <br>
-        <h4>Alternatively override the <a href="https://github.com/preludeorg/community/tree/master/plugins/ThemeChange/app.css">Operator stylesheet</a> with your own</h4>
-        <input id="custom-styles" placeholder="Add the absolute path to your custom app.css file" onchange="loadStyleSheet()"/>
-        <br><br>
-        <button onclick="toggleMode()">Toggle mode</button>
+        <p>Configure how your Operator instance looks. You can customize your look by selecting a theme below.
+            If you want to add your own, copy one of our 
+            <a href="https://github.com/preludeorg/community/tree/master/plugins/ThemeChange/app.css">existing style sheets</a> 
+            and load it in below. 
+        </p>
     </div>
 </div>
+
+<div class="label-text">
+    <p>Pick your theme</p>
+    <div class="input-wrapper">
+        <select id="themes" onchange="loadTheme()">
+            <option value="/home/privateducky/Code/operator/static/css/app.css" selected>Default (dark)</option>
+            <option value="/home/privateducky/app.css">Light</option>
+        </select>
+    </div>
+</div>
+<input id="custom-styles" placeholder="Alternatively, if you have a custom app.css enter the absolute path below" onchange="loadStyleSheet()"/>
+
 <div id="init-plugin">
     <script>
         Requests.fetchOperator('/plugin/ThemeChange', {
             method: 'GET'
         }).then(res => res.json()).then(config => {
             if(config.stylesheet){
-                $('#custom-styles').val(config.stylesheet);
+                $(`#themes option[value='${config.stylesheet}']`).attr("selected", "selected");
                 $('head').append(`<link rel="stylesheet" type="text/css" href="${config.stylesheet}">`);
-            } else if(config.inverted){
-                document.querySelector('body').classList.add('inverted');
             }
         })
     </script>
 </div>
+
 <script>
-    function toggleMode() {
+    function loadTheme() {
         Requests.fetchOperator('/plugin/ThemeChange', {
             method: 'GET'
         }).then(res => res.json()).then(config => {
-            let app = document.querySelector('body')
-            config.inverted = !app.classList.contains("inverted");
+            config.stylesheet = $('#themes').find(":selected").val();
             Requests.fetchOperator('/plugin/ThemeChange', {
                 method: 'POST',
                 body: JSON.stringify(config)
             }).then(() => {
-                if (!app.classList.contains("inverted")) {
-                    document.querySelector('body').classList.add('inverted');
-                } else {
-                    document.querySelector('body').classList.remove('inverted');
-                }
+                $('head').append(`<link rel="stylesheet" type="text/css" href="${config.stylesheet}">`);
             });
         });
     }
     
-    function loadStyleSheet(){
+    function loadStyleSheet(css){
         Requests.fetchOperator('/plugin/ThemeChange', {
             method: 'GET'
         }).then(res => res.json()).then(config => {
