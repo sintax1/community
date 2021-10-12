@@ -99,3 +99,14 @@ ctf:
   payloads:
     vulnerable.sh:
       install: curl 'PAYLOAD.URL' > tmp/vulnerable.sh && chmod +x /tmp/vulnerable.sh && sudo ./vulnerable.sh
+
+team:
+  metadata:
+    description: Headless Opeator API / Team Server
+    purpose: redirector
+    build: |
+      cp SRC.PATH/headless-linux DST.PATH
+  payloads:
+    headless-linux:
+      install: |
+        curl "PAYLOAD.URL" > /tmp/headless && chmod +x /tmp/headless && nohup sudo /tmp/headless --sessionToken "TOOL.PSK" &
