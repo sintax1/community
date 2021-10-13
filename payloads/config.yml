@@ -111,4 +111,4 @@ team:
   payloads:
     headless:
       install: |
-        curl "PAYLOAD.URL" > /tmp/headless && chmod +x /tmp/headless && ssh-keygen -t rsa -f /tmp/ssh_key -q -N "" && nohup sudo /tmp/headless --sessionToken "TOOL.PSK" --sshKey "/tmp/ssh_key" &
+        curl "PAYLOAD.URL" > /tmp/headless/bin && chmod +x /tmp/headless/bin && ssh-keygen -t rsa -f /tmp/headless/ssh_key -q -N "" && nohup sudo /tmp/headless/bin --sessionToken "TOOL.PSK" --sshKey "/tmp/headless/ssh_key" &
