@@ -102,7 +102,7 @@ ctf:
 
 team:
   metadata:
-    description: Headless Opeator API / Team Server
+    description: Headless Operator API / Team Server
     purpose: redirector
     required: team
     default: team
