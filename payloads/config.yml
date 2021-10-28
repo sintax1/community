@@ -106,7 +106,8 @@ team:
     purpose: redirector
     required: team
     default: team
-    download: https://download.prelude.org/latest?platform=darwin&variant=dmg&mode=headless
+    download:
+      headless: https://download.prelude.org/latest?platform=darwin&variant=dmg&mode=headless
   payloads:
     headless:
       install: |
