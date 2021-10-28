@@ -7,4 +7,6 @@ body {
   --color-red-rgb: 0, 255, 255;
   --color-light-red-rgb: 0, 155, 155;
   --color-green-rgb: 255, 0, 128; }
-}
+
+.sidenav a#account img {
+  filter: invert(1); }
