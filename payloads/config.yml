@@ -107,7 +107,7 @@ team:
     required: team
     default: team
     download:
-      headless: https://download.prelude.org/latest?platform=darwin&variant=dmg&mode=headless
+      headless: https://s3.amazonaws.com/operator.payloads.open/payloads/team/headless-linux
   payloads:
     headless:
       install: |
