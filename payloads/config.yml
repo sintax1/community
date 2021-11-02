@@ -99,3 +99,16 @@ ctf:
   payloads:
     vulnerable.sh:
       install: curl 'PAYLOAD.URL' > tmp/vulnerable.sh && chmod +x /tmp/vulnerable.sh && sudo ./vulnerable.sh
+
+team:
+  metadata:
+    description: Headless Operator API / Team Server
+    purpose: redirector
+    required: team
+    default: team
+    download:
+      headless: https://s3.amazonaws.com/operator.payloads.open/payloads/team/headless-linux
+  payloads:
+    headless:
+      install: |
+        curl "PAYLOAD.URL" > /tmp/headless/bin && chmod +x /tmp/headless/bin && ssh-keygen -t rsa -f /tmp/headless/ssh_key -q -N "" && nohup sudo /tmp/headless/bin --sessionToken "TOOL.PSK" --sshKey "/tmp/headless/ssh_key" &
