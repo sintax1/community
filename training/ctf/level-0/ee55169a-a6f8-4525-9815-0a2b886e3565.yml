@@ -15,7 +15,7 @@ hints:
   - You should complete this challenge from the Editor section or from the built-in reverse-shell
 blocks:
   How to create the level: |
-    Go to the Cloud plugin and deploy a new redirector, ensuring it is enabled.
+    Go to the Connect plugin and deploy a new redirector, ensuring it is enabled.
     Then deploy a new Linux machine with the vulnerable.sh payload installed.
 answer:
   script: $('#answer').val().toLowerCase()
