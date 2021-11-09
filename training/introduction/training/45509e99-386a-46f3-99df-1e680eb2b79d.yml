@@ -1,6 +1,6 @@
 id: 45509e99-386a-46f3-99df-1e680eb2b79d
-name: I am a purple teamer
-challenge: What is the name of Prelude's endpoint product for automated security testing?
+name: Purple team
+challenge: 
 context: |
   Purple teams should use Operator in a fully automated way, supplying continuous security testing to their blue team.
   <ol>

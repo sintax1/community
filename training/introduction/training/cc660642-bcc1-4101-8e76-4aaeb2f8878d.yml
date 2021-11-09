@@ -1,6 +1,6 @@
 id: cc660642-bcc1-4101-8e76-4aaeb2f8878d
-name: I am a blue teamer
-challenge: What enterprise plugin hooks into Splunk for full circle detection development?
+name: Blue team
+challenge: What Operator training program offers "man pages" for built-in TTPs?
 context: |
   Blue teams should use Operator to test their ability to detect common attacks.
   <ol>
@@ -39,5 +39,5 @@ blocks:
     according to rules established and monitored with the help of a neutral group refereeing the simulation or exercise.
     (NIST, https://csrc.nist.gov/glossary/term/blue_team)
 answer:
-  script: Number($('#answer').val().toLowerCase().includes('siem') 
+  script: Number($('#answer').val().toLowerCase().includes('att&ck') 
   value: 1

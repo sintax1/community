@@ -1,6 +1,6 @@
 id: 75857462-8f32-4809-96ae-a72062a5711b
-name: I am a red teamer
-challenge: What Operator training program offers "man pages" for built-in TTPs?
+name: Red team
+challenge: What Operator training program is designed for practicing red team skills?
 context: |
   Red teams should use Operator as a manual command-and-control center that allows them to experiment with automation.
   <ol>
