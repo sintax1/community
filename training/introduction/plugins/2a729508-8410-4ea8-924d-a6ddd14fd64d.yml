@@ -1,13 +1,12 @@
 id: 2a729508-8410-4ea8-924d-a6ddd14fd64d
 name: Understanding the Connect plugin
-challenge: Load the Connect plugin and beacon in an agent from a redirector.
+challenge: Click into the Connect plugin and use it to deploy a redirector and virtual "compromised" machine.
 context: |
-  The Connect plugin offers 2 functions: deploying redirectors so agents can reach your Operator instance over the
-  internet and deploying test computers for you to practice attacks on. In this situation we are going to utilize 
-  both functions in order to beacon in a new agent from a virtual machine that you have deployed within Connect. 
-  First, you will need to provision a redirector, then you will need to provision a virtual machine that of which
-  will require a remote desktop protocol to access the virtual machine. Within the virtual machine, activate an agent 
-  whose target is the redirector's address to successfully beacon in.
+  The Connect plugin offers three functions: deploying redirectors so agents can reach your Operator instance over 
+  the internet, deploying test computers for you to practice attacks on and offering the ability to link your Operator 
+  instance to your teammates so you can share agents. In this flag, you'll experience the first two functions first 
+  hand. Head to the Connect plugin, connect to your AWS account and see if you can deploy a redirector and virtual 
+  machine. This flag is completed once you've received a beacon from your compromised computer.
 template:
   name: submit
   data: []
@@ -15,23 +14,29 @@ resources:
   links:
     Connect plugin: https://feed.prelude.org/p/cloudy-with-a-chance-of-redirectors
     AWS: https://feed.prelude.org/p/how-to-set-up-aws-for-operator
-    Remote desktop protocol: https://docs.microsoft.com/en-us/troubleshoot/windows-server/remote/understanding-remote-desktop-protocol
+    Translators: https://feed.prelude.org/p/can-you-hear-me-now
 hints:
-  - Have you provisioned a virtual machine?
-  - Did you download a remote desktop protocal?
-  - have you provisioned a redirector?
+  - Is your AWS account connected?
+  - Did you deploy a redirector and confirm it is connected? It should show a green status circle.
+  - Did you deploy a virtual machine? You must deploy a redirector first and after it is connected, 
+    deploy your VM. In the Operate section, check the ranges to see if you have any agents in a "cloud" range.
 blocks:
-  Connect plugin: |
-    On top of the aforementioned functions, the Connect plugin allows profesional users
-    to launch Switchboards on their redirectors, which provides a management interface which makes it easy for a team
-    to share an agent deployed in the field. Switchboard supports re-routing the network connection for any agent,
-    including which Operator instance to direct the agent into.
-  Remote desktop protocol: |
-    Remote Desktop Protocol (RDP) is a proprietary protocol developed by Microsoft that provides a 
-    graphical interface for users to connect to another computer over a network connection.
+  Connect to your teammates: |
+    The Connect plugin has a professional feature allowing you to connect your Operator instance to your teammates. 
+    It works like this: provision and connect to a new redirector then send a teammate the generated host/password 
+    information, which they can plug into their Connect plugin. Once connected, any agent that comes in to you, your 
+    teammate or the new redirector will be mirrored across both of your Operator instances!
+  Amazon web services: |
+    Amazon Web Services (AWS) offers a broad set of global cloud-based products, through a secure cloud serviced platform
+    that caters to businesses looking to scale and grow. Their three main products include: EC2, Amazon’s virtual machine 
+    service, Glacier, a low-cost cloud storage service, and S3, Amazon’s storage system. In this scenario we will be using
+    EC2 to provision both our redirectors and virtual machines.
   Virtual machine: |
-    Virtual machines allow you to run an operating system in a desktop app window that acts like a completely 
-    independent computer within a safe, sandboxed environment.  
+    Virtual machines (VMs) are "virtual" versions of a computer, with dedicated amounts of CPU, memory, and storage 
+    that are "borrowed" from a physical host computer- such as your personal computer. Existing as a computer file, 
+    usually called an image, they act like a real computer that can be run in window as a separate computing 
+    environment. Virtual machines can run different operating systems from your physical host computers. 
+    This makes it easy for developers to spin up new environments and is a useful tool for to run test scenarios.
 answer:
   script: Number(Agent.agents.filter(function(a) { return a.metadata.redirector}).length) > 0
-value: True
+value: 1
