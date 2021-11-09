@@ -1,6 +1,6 @@
 id: 45509e99-386a-46f3-99df-1e680eb2b79d
 name: Purple team
-challenge: 
+challenge: Which Introduction course will walk you through deploying agents and adversaries?
 context: |
   Purple teams should use Operator in a fully automated way, supplying continuous security testing to their blue team.
   <ol>
@@ -42,5 +42,5 @@ blocks:
     a single narrative that maximizes both. Ideally Purple shouldn’t be a team at all, but rather a permanent dynamic between 
     Red and Blue (https://danielmiessler.com/study/red-blue-purple-teams/).
 answer:
-  script: Number($('#answer').val().toLowerCase().includes('protect') 
+  script: Number($('#answer').val().toLowerCase().includes('emulation') 
   value: 1
