@@ -1,0 +1,34 @@
+id: daddd488-7098-4b10-bdb4-bcac861b6680 
+name: I work in InfoSec
+challenge: What Operator training program is designed for InfoSec professionals?
+context: |
+  InfoSec professionals can deploy the Protect (endpoint) app on every workstation in their organization and 
+  perform localized red teaming on each machine. Protect probes both the user and the workstation and provides customized
+  security training to the end users, ultimately helping improve their cyber hygenie.
+  <ol>
+    <li>
+      Start by taking the free Pink Badge training program, available in the Train section. This program walks you through
+      basic red team processes and thinking like an adversary.
+    </li>
+    <li>
+      The final challenge of the Pink Badge includes working with the Protect (endpoint) app, which is intended for Windows or Mac
+      workstations. Once you've passed this challenge, head to login.prelude.org where you can see your results. 
+    </li>
+    <li>
+      Reach out to support@prelude.org to learn more about deploying Protect in your organization. 
+    </li>
+  </ol> 
+template:
+  name: input
+  data: []
+resources: {}
+hints: []
+blocks:
+  What is InfoSec?: |
+    Information Security, sometimes shortened to InfoSec, is the practice of protecting information by mitigating information risks. 
+    It is part of information risk management. It typically involves preventing or reducing the probability of unauthorized/inappropriate 
+    access to data, or the unlawful use, disclosure, disruption, deletion, corruption, modification, inspection, recording, or 
+    devaluation of information. It also involves actions intended to reduce the adverse impacts of such incidents.
+answer:
+  script: Number($('#answer').val().toLowerCase().includes('pink') 
+  value: 1
