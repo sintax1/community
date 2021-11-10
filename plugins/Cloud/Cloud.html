@@ -77,7 +77,8 @@
                                     config: {
                                         key_name: path.basename(config.aws.key_name),
                                         access_key_id: config.aws.access_key_id,
-                                        secret_access_key: config.aws.secret_access_key
+                                        secret_access_key: config.aws.secret_access_key,
+                                        region: config.aws.region
                                     }
                                 }
                                 Requests.fetchGatekeeper('/range/aws/gateway', {
@@ -169,7 +170,8 @@
                         config: {
                             key_name: path.basename(config.aws.key_name),
                             access_key_id: config.aws.access_key_id,
-                            secret_access_key: config.aws.secret_access_key
+                            secret_access_key: config.aws.secret_access_key,
+                            region: config.aws.region
                         }
                     }
                     let uri, success;
@@ -273,6 +275,12 @@
                                 <p>Private key path</p>
                                 <div class="input-wrapper"><input id="aws-key" type="text" spellcheck="false" placeholder=""/></div>
                             </div>
+                            <div class="label-text">
+                                <p>AWS region</p>
+                                <div class="input-wrapper">
+                                    <select id="aws-region"></select>
+                                </div>
+                            </div>
                         </div>
                         <div id="creds-gcp" style="display: none;">
                             <div class="label-text">
@@ -315,7 +323,8 @@
                         config['aws'] = {
                             key_name: $('#aws-key').val(),
                             access_key_id: $('#aws-access-key').val(),
-                            secret_access_key: $('#aws-secret-key').val()
+                            secret_access_key: $('#aws-secret-key').val(),
+                            region: $('#aws-region').val()
                         }
                         config['gcp'] = {
                             user_id: $('#user_id').val(),
@@ -331,6 +340,32 @@
                     });
                 });
             });
+        }
+
+        const populateAWSRegions = () => {
+            $('#aws-region').append([
+                'af-south-1',
+                'eu-north-1',
+                'ap-south-1',
+                'eu-west-3',
+                'eu-west-2',
+                'eu-south-1',
+                'eu-west-1',
+                'ap-northeast-3',
+                'ap-northeast-2',
+                'me-south-1',
+                'ap-northeast-1',
+                'sa-east-1',
+                'ca-central-1',
+                'ap-east-1',
+                'ap-southeast-1',
+                'ap-southeast-2',
+                'eu-central-1',
+                'us-east-1',
+                'us-east-2',
+                'us-west-1',
+                'us-west-2'
+            ].map(r => `<option value=${r}>${r}</option>`));
         }
 
         function buildOptions(){
@@ -393,6 +428,7 @@
             $('#aws-key').val(config.aws?.key_name || '');
             $('#aws-access-key').val(config.aws?.access_key_id || '');
             $('#aws-secret-key').val(config.aws?.secret_access_key || '');
+            populateAWSRegions();
             $('#user_id').val(config.gcp?.user_id || '');
             $('#project').val(config.gcp?.project || '');
             $('#rsa_key').val(config.gcp?.rsa_key || '');
