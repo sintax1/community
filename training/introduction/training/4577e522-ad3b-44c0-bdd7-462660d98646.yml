@@ -7,7 +7,7 @@ context: |
     <li>Download and start an agent on a target computer. Initial access is up to you.</li>
     <li>Open a reverse-shell to take manual control.</li>
     <li>Deploy a custom adversary to automate parts of your kill chain.</li>
-    <li>Click back to the Operate section, select your red range and deploy your new adversary against it.</li>
+    <li>Use the Editor section as your attack database, storing and sharing TTPs and payloads.</li>
     <li>Connect Operator to your teammates through the "team server" option.</li>
   </ol> 
 template:
