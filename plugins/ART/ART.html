@@ -30,7 +30,6 @@
   </table>
 </div>
 
-
 <div id="init-plugin">
   <script>
 
@@ -178,7 +177,7 @@
       <td><input id="fval" spellcheck="false" value="${value}" /></td>
       </tr>`).on('paste', 'p', (ev) => {
           ev.preventDefault();
-          document.execCommand("insertHTML", false, ev.originalEvent.clipboardData.getData("text/plain"));
+          document.execCommand('insertHTML', false, ev.originalEvent.clipboardData.getData('text/plain'));
       });
       row.find('#fval').on("focusout", () => {
           const key = row.find('#fkey').val().trim();
