@@ -44,5 +44,5 @@ blocks:
     a larger team, you'd consider moving to an Enterprise license if you want to aggregate the results from multiple individual 
     Operator instances or to do a deeper integration with your SIEM.
 answer:
-  script: Number($('#answer').val().toLowerCase().includes('att&ck') 
+  script: Number($('#answer').val().toLowerCase().includes('att&ck')) 
   value: 1
