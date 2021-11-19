@@ -12,7 +12,10 @@
 
 <div id="init-plugin">
   <script>
-    
-
+    Agents.forEach(agent => {
+      if (typeof agent.locked == 'boolean') {
+        agent.locked = Agent.LockEnum.unlocked;
+      }
+    });
   </script>
 </div>
