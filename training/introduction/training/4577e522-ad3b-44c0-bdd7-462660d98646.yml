@@ -29,5 +29,5 @@ blocks:
     Operator instances together through the Connect plugin. This acts a "team server" environment, allowing your full team to drive the operation
     at the same time.
 answer:
-  script: Number($('#answer').val().toLowerCase().includes('ctf') 
+  script: Number($('#answer').val().toLowerCase().includes('ctf')) 
   value: 1
