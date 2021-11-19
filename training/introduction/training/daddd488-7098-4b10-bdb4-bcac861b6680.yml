@@ -32,5 +32,5 @@ blocks:
     Your main goal is to get Protect on all the workstations in your org and you'll need the web portal (login.prelude.org) to schedule 
     chains, monitor your endpoints and aggregate the results.
 answer:
-  script: Number($('#answer').val().toLowerCase().includes('pink') 
+  script: Number($('#answer').val().toLowerCase().includes('pink'))
   value: 1
