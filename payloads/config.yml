@@ -24,6 +24,7 @@ pneuma:
   metadata:
     description: The default open-source agent written in GoLang
     purpose: agent
+    zip: 1
     build: |
       GOOS=darwin go build -ldflags="-s -w -X main.randomHash=$(openssl rand -base64 16)" -o DST.PATH/pneuma-darwin SRC.PATH/main.go && \
       GOOS=linux go build -ldflags="-s -w -X main.randomHash=$(openssl rand -base64 16)" -o DST.PATH/pneuma-linux SRC.PATH/main.go && \
@@ -55,6 +56,7 @@ schism:
   metadata:
     description: Simple FTP agent (requires a translator)
     purpose: agent
+    zip: 1
     build: |
       cp SRC.PATH/schism.py DST.PATH
     platforms: 
@@ -72,6 +74,7 @@ nicodemus:
   metadata:
     description: Nicodemus is a cross-platform Nim implant written by Roger Johnston (VVX7 - https://github.com/VVX7/nicodemus).
     purpose: agent
+    zip: 1
     build: |
       docker run --rm -v REPO.CWD:/usr/local/src -w /usr/local/src/payloads/src/nicodemus chrishellerappsian/docker-nim-cross:latest ./build-docker.sh;
       cp SRC.PATH/payloads/* DST.PATH;
