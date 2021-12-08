@@ -72,7 +72,7 @@ class Beacon:
             Pwd=os.getcwd(),
             Target=target,
             Links=links,
-            Slepp=15,
+            Sleep=15,
         )
 
     @staticmethod
