@@ -72,7 +72,7 @@ class Beacon:
             Pwd=os.getcwd(),
             Target=target,
             Links=links,
-            Slepp=15,
+            Sleep=15,
         )
 
     @staticmethod
@@ -85,7 +85,7 @@ class Beacon:
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser('Start agent')
-    parser.add_argument('-A', '--address', required=False, default='http://localhost:3391')
+    parser.add_argument('-A', '--address', required=False, default='http://10.1.10.100:3391')
     parser.add_argument('-J', '--jitter', required=False, default=10)
     args = parser.parse_args()
     Beacon(args.address, args.jitter).monitor()
