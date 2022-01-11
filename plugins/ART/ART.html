@@ -71,7 +71,7 @@
           ev.preventDefault();
           ev.stopPropagation();
           flushArtFacts();
-          alert('Saved! View the parsed input arguments below, which were saved along with the TTPs.');
+          Basic.showNotification('Saved!', 'View the parsed input arguments below, which were saved along with the TTPs.');
       });
 
       $('#delete-ttps').click((ev) => {
@@ -99,7 +99,7 @@
                   ART_FACTS = {};
                   $('#fact-table tbody').empty();
                   $('#art-plugin-container .loader').toggleClass('loading', false);
-                  alert('Deleted! All Atomic Red Team TTPs have been deleted from your workspace. Please restart Operator in order to remove all ART facts');
+                  Basic.showNotification('Deleted!', 'All Atomic Red Team TTPs have been deleted from your workspace. Please restart Operator in order to remove all ART facts');
                 });
               });
             });
