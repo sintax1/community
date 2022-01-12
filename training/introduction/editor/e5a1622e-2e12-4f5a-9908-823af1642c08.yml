@@ -42,6 +42,6 @@ answer:
             totals.filter(ttp => !unique.has(ttp)).forEach(i => {
                 unique.add(i);
             });
-            resolve(unique.size -1 === parseInt($('#answer').val())))
+            resolve(unique.size -1 === parseInt($('#answer').val()))
         }));
   value: 1
