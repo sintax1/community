@@ -15,4 +15,4 @@
 	path = payloads/src/plugins
 	url = git@github.com:preludeorg/plugins.git
 	update = checkout
-	checkout = master
+	checkout = submodules
