@@ -132,3 +132,10 @@ plugins:
   payloads:
     Editor.html: {}
     Connect.html: {}
+
+CVE-2021-4034:
+  metadata:
+    description: CVE-2021-4034 payloads
+    build: cp -r SRC.PATH/* DST.PATH;
+    payloads:
+      blasty-vs-pkexec.c: {}
