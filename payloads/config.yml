@@ -1,7 +1,7 @@
 translators:
   metadata:
     description: An extra Operator listening post for redirectors
-    tactic: Command and Control
+    tactic: command-and-control
     purpose: redirector
     build: |
       tar zcf DST.PATH/ftp.tar.gz -C SRC.PATH ftp && tar zcf DST.PATH/grpc.tar.gz -C SRC.PATH grpc
@@ -24,7 +24,7 @@ translators:
 pneuma:
   metadata:
     description: The default open-source agent written in GoLang
-    tactic: Command and Control
+    tactic: command-and-control
     purpose: agent
     zip: 1
     build: |
@@ -57,7 +57,7 @@ pneuma:
 schism:
   metadata:
     description: Simple Python agent (FTP requires a translator)
-    tactic: Command and Control
+    tactic: command-and-control
     purpose: agent
     zip: 1
     build: |
@@ -80,7 +80,7 @@ schism:
 nicodemus:
   metadata:
     description: Nicodemus is a cross-platform Nim implant written by Roger Johnston (VVX7 - https://github.com/VVX7/nicodemus).
-    tactic: Command and Control
+    tactic: command-and-control
     purpose: agent
     zip: 1
     build: |
@@ -102,7 +102,7 @@ nicodemus:
 ctf:
   metadata:
     description: Create a vulnerable environment to practice against
-    tactic: Execution
+    tactic: execution
     purpose: virtualmachine
     build: |
       cp SRC.PATH/vulnerable.sh DST.PATH
@@ -115,7 +115,7 @@ ctf:
 headless:
   metadata:
     description: Headless Operator API / Team Server
-    tactic: Resource Development
+    tactic: resource-development
     purpose: redirector
     required: team
     default: team
@@ -142,7 +142,7 @@ plugins:
 T1547.002:
    metadata:
      description: Dropper and payload for T1547.002
-     tactic: Persistence
+     tactic: persistence
      purpose: payload
      build: |
        cd SRC.PATH/T1547.002/install/
@@ -159,7 +159,7 @@ T1547.002:
 CVE-2021-4034:
   metadata:
     description: CVE-2021-4034 payloads
-    tactic: Priviledge Escalation
+    tactic: priviledge-escalation
     purpose: payload
     build: cp -r SRC.PATH/* DST.PATH;
     payloads:
