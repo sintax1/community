@@ -142,7 +142,7 @@ plugins:
 T1547.002:
    metadata:
      description: Dropper and payload for T1547.002
-     tactic: Priviledge Escalation
+     tactic: Persistence
      purpose: payload
      build: |
        cd SRC.PATH/T1547.002/install/

