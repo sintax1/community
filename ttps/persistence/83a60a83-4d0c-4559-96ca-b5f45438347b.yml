@@ -13,7 +13,7 @@ platforms:
     psh:
       command: |-
         # Installer
-        Start-Process .\install.exe "#{operator.payloads}/Persistence/T1547.002/package.dll"
+        Start-Process .\install.exe "#{operator.payloads}/persistence/package.dll"
       payload: 'persistence/install.exe'
       variants:
         - command: >-
