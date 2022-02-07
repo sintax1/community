@@ -16,3 +16,6 @@
 	url = git@github.com:preludeorg/plugins.git
 	update = checkout
 	branch = master
+[submodule "payloads/src/tr4cefl0w-payloads"]
+	path = payloads/src/tr4cefl0w-payloads
+	url = git@github.com:preludeorg/tr4cefl0w-payloads.git
