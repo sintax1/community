@@ -18,8 +18,8 @@ not trust between the client and server.
 
 ---
 The API requires a token to be passed with the request. Your token can be found in:
-Operator -> Settings -> Network -> Token. In the following commands replace
-`$TOKEN` with `'Authorization: YOURTOKEN'`
+Operator -> Settings -> Network -> Token. In the following commands replace `$TOKEN` 
+with `'Authorization: YOURTOKEN'`
 
 
 ## Endpoints 
@@ -28,15 +28,15 @@ Operator -> Settings -> Network -> Token. In the following commands replace
 
 ---
 #### Get all chains loaded in Operator
-```
+```bash
 curl -X GET -sk -H $TOKEN  "https://localhost:8888/v1/chains" | json_pp
 ```
 #### Get a specific chain by identifier
-```
+```bash
 curl -X GET -sk -H $TOKEN  "https://localhost:8888/v1/chains/printnightmare" | json_pp
 ```
 #### Create a new chain
-```
+```bash
 curl -X POST -sk -H $TOKEN -H 'Content-Type: application/json' "https://localhost:8888/v1/chains" -d '{
     "name": "my_new_adversary",
     "ttps": [
@@ -50,7 +50,7 @@ curl -X POST -sk -H $TOKEN -H 'Content-Type: application/json' "https://localhos
 
 #### Modify an existing chain
 You can modify an existing chain by sending an updated chain body to the `/chains/YourChainID` endpoint:
-```
+```bash
 curl -X PUT -sk -H $TOKEN -H 'Content-Type: application/json' "https://localhost:8888/v1/chains/51154993-dabe-4999-94a9-9e81b781ecd8" -d '{
     "name": "my_newer_adversary",
     "ttps": [
@@ -63,23 +63,23 @@ curl -X PUT -sk -H $TOKEN -H 'Content-Type: application/json' "https://localhost
 }' | json_pp
 ```
 #### Delete a chain
-```
+```bash
 curl -X DELETE -sk -H $TOKEN "https://localhost:8888/v1/chains/51154993-dabe-4999-94a9-9e81b781ecd8"
 ```
 ### Agents
 
 ---
 #### Get all Agents in Operator
-```
+```bash
 curl -X GET -sk -H $TOKEN  "https://localhost:8888/v1/agents" | json_pp
 ```
 #### Get a specific Agent in Operator
-```
+```bash
 curl -X GET -sk -H $TOKEN "https://localhost:8888/v1/agents/test" | json_pp
 ```
 #### Update an Agent's configuration
 You can update your agent's configuration by passing it updated fields.
-```
+```bash
 curl -X PUT -sk -H $TOKEN -H 'Content-Type: application/json' "https://localhost:8888/v1/agents/test" -d '{
     "range": "new_range",
     "label": "new_agent_name"
@@ -90,16 +90,16 @@ curl -X PUT -sk -H $TOKEN -H 'Content-Type: application/json' "https://localhost
 
 ---
 #### Get all TTPs in Operator
-```
+```bash
 curl -X GET -sk -H $TOKEN "https://localhost:8888/v1/ttps" | json_pp
 ```
 #### Get a specific TTP in Operator
-```
+```bash
 curl -X GET -sk -H $TOKEN "https://localhost:8888/v1/ttps/ff9bbd7f-871e-4db4-bedb-4e7a64a309bf" | json_pp
 ```
 #### Create a new TTP in Operator
 Create a new TTP by posting a TTP body to the endpoint:
-```
+```bash
 curl -X POST -sk -H $TOKEN -H 'Content-Type: application/json' "https://localhost:8888/v1/ttps" -d '{
     "id" : "ff9bbd7f-871e-4db4-bsdb-4e7a64a309bf",
     "name" : "Who Dat",
@@ -126,7 +126,7 @@ curl -X POST -sk -H $TOKEN -H 'Content-Type: application/json' "https://localhos
 }'
 ```
 #### Modify a TTP in Operator
-```
+```bash
 curl -X PUT -sk -H $TOKEN -H 'Content-Type: application/json' "https://localhost:8888/v1/ttps/ff9bbd7f-871e-4db4-bsdb-4e7a64a309bf" -d '{
     "name" : "Who is That",
     "metadata" : {
@@ -139,7 +139,7 @@ curl -X PUT -sk -H $TOKEN -H 'Content-Type: application/json' "https://localhost
 }'
 ```
 #### Delete a TTP in Operator
-```
+```bash
 curl -X DELETE -sk -H $TOKEN "https://localhost:8888/v1/ttps/ff9bbd7f-871e-4db4-bsdb-4e7a64a309bf"
 ```
 ### Operations
@@ -148,7 +148,7 @@ curl -X DELETE -sk -H $TOKEN "https://localhost:8888/v1/ttps/ff9bbd7f-871e-4db4-
 #### Send Operation(s) to an agent in Operator
 
 An operation will task agent(s) or range(s) to run a collection of TTPs or a Chain. The simplest type of operation for an agent looks like this:
-```
+```json
 {
     "name": "operation_one",
     "agents": ["my_agent"],
@@ -156,7 +156,7 @@ An operation will task agent(s) or range(s) to run a collection of TTPs or a Cha
 }
 ```
 The simplest type of operation for a range looks like this (running a chain instead of a TTP):
-```
+```json
 {
     "name": "operation_one",
     "ranges": ["my_range"],
@@ -166,7 +166,7 @@ The simplest type of operation for a range looks like this (running a chain inst
 #### **OPTIONAL** Fields:
 ***Facts***:
 Attaching facts allows you to run Chains/TTPs that require certain facts to be known before executing.
-```
+```json
 {
     "name": "operation_two",
     "agents": ["agent1", "agent2"]
@@ -176,7 +176,7 @@ Attaching facts allows you to run Chains/TTPs that require certain facts to be k
 ```
 
 A cURL command for queueing an operation that runs 3 ttps for two agents:
-```
+```bash
 curl -X POST -sk -H $TOKEN -H 'Content-Type: application/json' "https://localhost:8888/v1/operations" -d '{
     "name": "operation_two",
     "agents": ["agent_one", "agent_two"],
@@ -189,12 +189,12 @@ curl -X POST -sk -H $TOKEN -H 'Content-Type: application/json' "https://localhos
 
 ---
 #### Get Operator's Local Settings
-```
+```bash
 curl -X GET -sk -H $TOKEN "https://localhost:8888/v1/settings" | json_pp
 ```
 ---
 #### Update Operator's Local Settings
-```
+```bash
 curl -X PUT -sk -H $TOKEN -H 'Content-Type: application/json' "https://localhost:8888/v1/settings" -d '{"token": "new_token_value"}' | json_pp
 ```
 
@@ -202,6 +202,6 @@ curl -X PUT -sk -H $TOKEN -H 'Content-Type: application/json' "https://localhost
 
 ---
 #### Run a command on the Operator host machine
-```
+```bash
 curl -X POST -sk -H $TOKEN -H 'Content-Type: application/json' "https://localhost:8888/v1/command" -d '{"command": "ifconfig"}' | json_pp
 ```
