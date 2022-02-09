@@ -13,8 +13,8 @@ platforms:
     psh:
       command: |-
         # Installer
-        Start-Process .\install.exe "#{operator.payloads}/uploads/T1547.002/package.dll"
-      payload: '#{operator.payloads}/uploads/T1547.002/install.exe'
+        Start-Process .\18bbae38-b65d-4d0c-b5d3-e79ba3b6e130 "#{operator.payloads}/uploads/T1547.002/package.dll"
+      payload: 18bbae38-b65d-4d0c-b5d3-e79ba3b6e130
       variants:
       - command: >-
           # Install using PowerShell

