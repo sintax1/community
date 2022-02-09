@@ -32,6 +32,7 @@ with `'Authorization: YOURTOKEN'`
 ```bash
 curl -X GET -sk -H $TOKEN  "https://localhost:8888/v1/chains" | json_pp
 ```
+
 #### Get a specific chain by identifier
 
 ```bash
@@ -147,6 +148,7 @@ curl -X POST -sk -H $TOKEN -H 'Content-Type: application/json' "https://localhos
 }'
 ```
 #### Modify a TTP in Operator
+
 ```bash
 curl -X PUT -sk -H $TOKEN -H 'Content-Type: application/json' "https://localhost:8888/v1/ttps/ff9bbd7f-871e-4db4-bsdb-4e7a64a309bf" -d '{
     "name" : "Who is That",
@@ -193,9 +195,7 @@ The simplest type of operation for a range looks like this (running a chain inst
 ```
 
 #### **OPTIONAL** Fields:
-
 ##### ***Facts***:
-
 Attaching facts allows you to run Chains/TTPs that require certain facts to be known before executing.
 
 ```json
