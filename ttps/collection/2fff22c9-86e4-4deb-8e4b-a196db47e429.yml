@@ -1,21 +1,26 @@
+description: This procedure will add a PowerShell Exchange snap-in to the current
+  session and execute the Get-Mailbox cmdlet, which will return the full list of mailbox
+  objects residing on the Exchange server.
 id: 2fff22c9-86e4-4deb-8e4b-a196db47e429
+metadata:
+  authors:
+  - bfuzzy1
+  tags:
+  - hafnium
+  - destructive
 name: Collect Microsoft Exchange mailbox data
-description: This procedure will add a PowerShell Exchange snap-in to the current session and execute the Get-Mailbox cmdlet, which will return the full list of mailbox objects residing on the Exchange server.
-tactic: collection
-technique:
-  id: T1114
-  name: Email Collection
 platforms:
   windows:
     psh:
       command: Add-PSSnapin Microsoft.Exchange.Management.PowerShell.SnapIn; Get-Mailbox
       variants:
-        - command: Add-PSSnapin Microsoft.Exchange.Management.PowerShell.SnapIn; Get-MailboxExportRequest –ResultSize 100
-        - command: Add-PSSnapin Microsoft.Exchange.Management.PowerShell.SnapIn; Get-MailboxExportRequest | RemoveMailboxExportRequest –Confirm:$false
-metadata:
-  authors:
-    - bfuzzy1
-  tags:
-    - hafnium
-    - destructive
-  version: 2
+      - command: Add-PSSnapin Microsoft.Exchange.Management.PowerShell.SnapIn; Get-MailboxExportRequest
+          –ResultSize 100
+        id: 9258543f-0082-45e3-93a6-02a770b96bee
+      - command: Add-PSSnapin Microsoft.Exchange.Management.PowerShell.SnapIn; Get-MailboxExportRequest
+          | RemoveMailboxExportRequest –Confirm:$false
+        id: 97575b86-0306-4a88-b8ed-d8ce05b339f2
+tactic: collection
+technique:
+  id: T1114
+  name: Email Collection

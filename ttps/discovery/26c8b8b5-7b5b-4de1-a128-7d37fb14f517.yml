@@ -14,11 +14,11 @@ platforms:
         nltest /dsgetdc:%USERDOMAIN%
       variants:
       - command: nltest /dclist:#{domain.T1016}
+        id: adcf9407-7724-49e4-bedd-51b249077c75
     psh:
       command: |
         ([System.DirectoryServices.ActiveDirectory.Domain]::GetCurrentDomain()).DomainControllers
 metadata:
-  version: 4
   authors:
   - privateducky
   - MITRE

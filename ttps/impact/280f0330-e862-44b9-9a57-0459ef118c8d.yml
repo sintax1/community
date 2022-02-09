@@ -17,11 +17,11 @@ platforms:
         wmic shadowcopy delete /nointeractive
       variants:
       - command: Get-WmiObject Win32_Shadowcopy | ForEach-Object {$_.Delete();}
+        id: dc3e5730-874d-42c8-b8d5-8b19b9625d7f
 metadata:
   authors:
   - bfuzzy1
   - w0rk3r
   tags:
   - destructive
-  version: 4
   release_date: 2021-05-24
