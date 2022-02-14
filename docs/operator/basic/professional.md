@@ -26,24 +26,24 @@ use the API directly.
 
 Start by logging in, which will send an email verification to your claimed account:
 ```sh
-curl -X POST -H 'Content-Type: application/json' "https://practice.prelude.org/claim" -d '{"action":"send","claim":"example@prelude.org"}'
+curl -X POST -H 'Content-Type: application/json' "https://login.prelude.org/claim" -d '{"action":"send","claim":"example@prelude.org"}'
 ```
 
 Use the token you received to complete the login process, which will generate you an API token you can use moving forward:
 ```sh
-curl -X POST -H 'Content-Type: application/json' "https://practice.prelude.org/claim" -d '{"claim":"$TOKEN"}'
+curl -X POST -H 'Content-Type: application/json' "https://login.prelude.org/claim" -d '{"claim":"$TOKEN"}'
 ```
 
 Using your new token, you can access the Chains API in the following ways:
 
 Get the 10 most recently released chains.
 ```sh
-curl -X GET -H 'Content-Type: application/json' "https://practice.prelude.org/chains?count=10&email=example@prelude.org&token=$TOKEN"
+curl -X GET -H 'Content-Type: application/json' "https://login.prelude.org/chains?count=10&email=example@prelude.org&token=$TOKEN"
 ```
 
 Some chains contain payloads. You can download each.
 ```sh
-curl -X GET -H 'Content-Type: application/json' "https://practice.prelude.org/chains/payload=sha1/payload?email=example@prelude.org&token=$TOKEN"
+curl -X GET -H 'Content-Type: application/json' "https://login.prelude.org/chains/payload=sha1/payload?email=example@prelude.org&token=$TOKEN"
 ```
 
 ### Private support
