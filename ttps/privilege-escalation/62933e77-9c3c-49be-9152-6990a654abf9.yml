@@ -11,5 +11,5 @@ platforms:
       command: dsenableroot -u #{discovery.local.existing.user} -p #{discovery.local.existing.user.password} -r #{privilege-escalation.local.new.user.password}
 metadata:
   authors:
-    - bfuzzy1
+  - bfuzzy1
   tags: []
