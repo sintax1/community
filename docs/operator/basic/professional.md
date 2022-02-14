@@ -25,24 +25,24 @@ use the API directly.
 > Note: Each request should also contain a User-Agent header, left out of these examples for brevity.
 
 Start by logging in, which will send an email verification to your claimed account:
-```sh
+```bash
 curl -X POST -H 'Content-Type: application/json' "https://login.prelude.org/claim" -d '{"action":"send","claim":"example@prelude.org"}'
 ```
 
 Use the token you received to complete the login process, which will generate you an API token you can use moving forward:
-```sh
+```bash
 curl -X POST -H 'Content-Type: application/json' "https://login.prelude.org/claim" -d '{"claim":"$TOKEN"}'
 ```
 
 Using your new token, you can access the Chains API in the following ways:
 
 Get the 10 most recently released chains.
-```sh
+```bash
 curl -X GET -H 'Content-Type: application/json' "https://login.prelude.org/chains?count=10&email=example@prelude.org&token=$TOKEN"
 ```
 
 Some chains contain payloads. You can download each.
-```sh
+```bash
 curl -X GET -H 'Content-Type: application/json' "https://login.prelude.org/chains/payload=sha1/payload?email=example@prelude.org&token=$TOKEN"
 ```
 
