@@ -1,6 +1,11 @@
 id: pink
 name: Pink Badge
-description: A self-paced class to learn cybersecurity
+description: |
+  Operator is a command-and-control (C2) application designed for red and purple teamers to conduct security testing.
+  However, the burden of security often falls to the IT department, which may not be equipped to defend the environment.
+  Pink Badge is a self-paced training program designed to solve this problem: introduce IT professionals to cybersecurity 
+  and bootstrap them with the basic understanding of how adversaries attack their networks. Pink Badge is designed to take 
+  4 weeks.
 courses:
   - name: registration
     description: Start here to register for the program
