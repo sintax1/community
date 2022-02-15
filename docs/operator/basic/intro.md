@@ -7,7 +7,7 @@
 Prelude Operator is an automated red teaming platform, packed into a desktop application. Operator is
 free to use and has open-sourced the components you should expect out of a security tool: the attacks
 you run (TTPs) and the things that run the attacks (agents). This is an actively supported project
-with the technical team available on the Discord server.
+with the technical team available on the [Discord server](https://discord.gg/NWURE99JzE).
 
 ### Post-compromise
 
@@ -42,6 +42,5 @@ Read the doc pages for Professional and Enterprise licenses for details on upgra
 ---
 
 - [Support](https://github.com/preludeorg/operator-support) repository to file issues or feature requests
-- [Discord server](https://discord.gg/NWURE99JzE) to interact with the team
 - [YouTube video library](https://www.youtube.com/channel/UCZyx-PDZ_k7Vuzyqr4-qK9A) containing tutorials and use-cases
 - [Blog](https://feed.prelude.org) where we post on general security and specific Operator topics
