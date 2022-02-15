@@ -15,14 +15,14 @@ courses:
       - fc7e65a1-7c08-4aec-a247-aefe15477b98
       - e573a081-0fc3-49b3-b039-cd72e3772a62
       - be82d7a7-bb60-47a0-834d-655318c08369
-  - name: basic deployment
+  - name: basic
     description: Discover the use of editor and stockpile of available TTPs
     challenges:
       - 326c369e-4672-48c1-9120-2fdd3a13d80d
       - 1655c859-17dd-4b53-9ae6-3e895afb8cc7
       - 3abff28a-e1c0-498f-a273-0ab8e627d122
       - 9a6caab1-13a1-4b44-9eb4-b4994d860863
-  - name: understanding agents
+  - name: agents
     description: Deploy, configure and learn the capabilities of agents
     challenges:
       - 79c1cf88-b321-45af-a157-a245de29ddc0
@@ -32,7 +32,7 @@ courses:
       - c276c08c-2eb0-4dfe-b542-91e8409c60ab
       - 8fb4c5f2-2be1-4f54-a330-061992cc8a4f
       - 9e7b2d08-21bd-4244-ab46-243d597e5d29
-  - name: advanced deployment
+  - name: advanced
     description: Creating and managing procedures to launch against agents
     challenges:
       - 5dcf668b-b3ad-4ee5-b595-c716baf79b2c
