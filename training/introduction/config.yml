@@ -1,6 +1,9 @@
 id: introduction
 name: Introduction
-description: Learn how to use the Prelude Operator from start to finish
+description: |
+  The Introduction program takes you through Operator and teaches you how to get the most from it.
+  The program is designed like a Capture The Flag (CTF) event - so don't expect answers to be on the page. 
+  You may need to hunt around the application or perform actions to capture the flags. Good luck!
 courses:
   - name: orientation
     description: Explore and understand the terminology and Operator interface
