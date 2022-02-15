@@ -30,7 +30,7 @@ platforms:
   darwin:
     sh:
       command: |
-        curl #{payload.url) > /tmp/pneuma && 
+        curl #{payload.url} > /tmp/pneuma && 
         chmod +x /tmp/pneuma && 
         nohup /tmp/pneuma -name $(echo $HOSTNAME) -address #{operator.tcp} &
       payload: pneuma-darwin
