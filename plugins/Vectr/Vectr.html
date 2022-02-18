@@ -1,0 +1,292 @@
+<div class="profile-heading-container">
+    <div class="body">
+        <strong class="profile-heading">Publish to Vectr</strong>
+        <p>
+          The newest release of Vectr (v8.2.1) enables publishing data directly to the Vectr API. Set your Vectr credentials
+          in this plugin and your operations will be automatically published to Vectr.
+        </p>
+    </div>
+</div>
+
+<div>
+    <div class="label-text">
+        <p>Vectr URL</p>
+        <div class="input-wrapper"><input id="vectr-url" type="text" placeholder="https://sravectr.internal:8081"/></div>
+    </div>
+    <div class="label-text">
+        <p>Database Name</p>
+        <div class="input-wrapper"><input id="vectr-db" type="text" placeholder="DEMO_PURPLE_CE"/></div>
+    </div>
+    <div class="label-text">
+        <p>Organization Name</p>
+        <div class="input-wrapper"><input id="vectr-org" type="text" placeholder="MITRE"/></div>
+    </div>
+    <div class="label-text">
+      <p>API Key ID</p>
+      <div class="input-wrapper"><input id="vectr-key-id" type="text" /></div>
+    </div>
+    <div class="label-text">
+      <p>API Secret Key</p>
+      <div class="input-wrapper"><input id="vectr-secret-key" type="password"/></div>
+    </div>
+    <div class="label-text">
+        <p>Determine Campaign</p>
+        <div class="input-wrapper">
+            <select id="campaign-selector" onchange="campaignSelection()">
+                <option value="default" selected>Automatically create campaign</option>
+                <option value="manual">Specify a campaign</option>
+            </select>
+        </div>
+    </div>
+    <div id="manual-campaign" class="label-text" style="display:none">
+        <p>Campaign Name</p>
+        <div class="input-wrapper"><input id="vectr-campaign" type="text"/></div>
+    </div>
+    <button onclick="saveVectr()">Save</button>
+</div>
+
+<div id="init-plugin"><script type="text/javascript">
+  let vectr;
+  let orgId;
+  let baseAssessment;
+  let operationsToCampaign = {};
+
+  function  getOrganizationIdByName (name) {
+    const query = `query {
+      organizations(filter: {name: {eq: \"${name}\"}}) {
+        nodes { id, name }
+      }
+    }`;
+    return fetchVectr({body: JSON.stringify({query: query})});
+  }
+
+  function  getAssessmentByName (name) {
+    const query = `query {
+      assessments(db: \"${vectr.database}\", filter: {name: {eq: \"${name}\"}}) {
+        nodes { id, name, description, campaigns{id, description}, tags{id}, offset, createTime, updateTime }
+      }
+    }`;
+    return fetchVectr({body: JSON.stringify({query: query})});
+  }
+
+  function getCampaignsByIds (campaignIds) {
+    const query = `query CampaignsByIds($ids: [String]!) {
+      campaignsByIds(db: \"${vectr.database}\", ids: $ids) {
+        nodes {
+          id, name, description
+        }
+      }
+    }`;
+    return fetchVectr({body: JSON.stringify({query: query, variables: {ids: campaignIds}})});
+  }
+
+  function createAssessment(name, org_id)  {
+    const query = `mutation ($input: CreateAssessmentInput!) {
+      assessment {
+        create(input: $input) {
+          assessments {
+             id, name, description, tags{id}, offset, createTime, updateTime
+          }
+        }
+      }
+    }`;
+    const variables = {input: {db: vectr.database,
+        assessmentData:[{name: name, organizationIds:[org_id]}]}};
+    return fetchVectr({body: JSON.stringify({query: query, variables: variables})});
+  }
+
+  function createCampaign(campaign_name, operation_id, parent_assessment_id, org_id) {
+    const query = `mutation ($input: CreateCampaignInput!) {
+      campaign {
+        create(input: $input) {
+          campaigns {
+            id, name, description, createTime
+          }
+        }
+      }
+    }`;
+    const variables = {input: {db: vectr.database, assessmentId: parent_assessment_id,
+        campaignData: [{name: campaign_name, description: operation_id, organizationIds: [org_id]}]}};
+    return fetchVectr({body: JSON.stringify({query: query, variables: variables})});
+  }
+
+  function  createTestCase(link, ttp, campaignId){
+    const query = `mutation ($input: CreateTestCaseAndTemplateMatchByNameInput!) {
+      testCase {
+        createWithTemplateMatchByName(input: $input) {
+          testCases {
+            id, name
+          }
+        }
+      }
+    }`;
+    const testCase = {name: ttp.name, description: ttp.description, phase: normalizePhase(ttp.tactic), technique: link.technique,
+      tags: [link.tag, link.host, link.platform, link.executor], organization: vectr.org_name, status: "COMPLETED", outcome: "TBD",
+      outcomeNotes: link.response, redTools: [{name: 'Operator', vendor: 'Prelude'}], operatorGuidance: link.request,
+      attackStart: link.timestamp, attackStop: link.timestamp};
+    const variables = {input: {db: vectr.database, campaignId: campaignId,
+        createTestCaseInputs: [{testCaseData: testCase}]}}
+    return fetchVectr({body: JSON.stringify({query: query, variables: variables})});
+  }
+
+  function fetchVectr(params) {
+    return new Promise(((resolve, reject) => {
+      fetch(`${vectr.url}/sra-purpletools-rest/graphql`, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization": `VEC1 ${vectr.key_id}:${vectr.secret_key}`
+        },
+        ...params
+      })
+        .then(res => res.json())
+        .then(res => resolve(res))
+        .catch(err => reject(err))
+      }));
+  }
+
+  function normalizePhase(tactic) {
+    const tactics = {
+      'resource-development': 'Resource Development',
+      'initial-access': 'Initial Access',
+      'defense-evasion': 'Defense Evasion',
+      'command-and-control': 'Command & Control',
+      'discovery': 'Discovery',
+      'collection': 'Collection',
+      'persistence': 'Persistence',
+      'credential-access': 'Credential Access',
+      'privilege-escalation': 'Privilege Escalation',
+      'lateral-movement': 'Lateral Movement',
+      'execution': 'Execution',
+      'exfiltration': 'Exfiltration',
+      'impact': 'Impact'
+    }
+    return tactics[tactic];
+  }
+
+  let PUBLISH_CAMPAIGN_LOCK = Promise.resolve(true);
+  function publishCampaign (operation){
+    return PUBLISH_CAMPAIGN_LOCK = PUBLISH_CAMPAIGN_LOCK.then(() => new Promise((resolve, reject) => {
+      if(operationsToCampaign.hasOwnProperty(operation)) {
+        resolve(operationsToCampaign[operation]);
+      } else {
+        createCampaign(vectr.campaign === 'automatic' ? `Prelude Operation - ${new Date().toLocaleString()}` : operation, operation, baseAssessment.id, orgId)
+          .then(res => {
+            operationsToCampaign[operation] = res.data.campaign.create.campaigns[0].id;
+            resolve(operationsToCampaign[operation]);
+          })
+      }
+    }));
+  }
+
+  function publishLink(link){
+    publishCampaign(vectr.campaign === 'automatic' ? link.operation : vectr.campaign)
+      .then(campaignId => {
+        Requests.fetchOperator(`/attack/${link.ttp}`)
+          .then(res => res.json())
+          .then(ttp => {
+            createTestCase(link, ttp, campaignId)
+              .catch((err) => console.log(err))
+          });
+      });
+  }
+
+  function initializeOperationCampaignMap() {
+    return new Promise((resolve, reject) => {
+      getCampaignsByIds(baseAssessment.campaigns.map(c => c.id))
+        .then(res => {
+          let campaigns = {}
+          res.data.campaignsByIds.nodes.forEach((campaign) => {
+            campaigns[campaign.description] = campaign.id;
+          });
+          resolve(campaigns);
+        });
+    })
+  }
+
+  function initializeVectrAssessment(){
+    return new Promise((resolve, reject) => {
+      getOrganizationIdByName(vectr.org_name)
+        .then(res => {
+          if (res.data.organizations.nodes.length === 0) {
+            reject(`Organization '${vectr.org_name}' cannot be found in Vectr! Initialization failed.`);
+          } else {
+            orgId = res.data.organizations.nodes[0].id;
+            getAssessmentByName('Prelude Assessment')
+              .then(res => {
+                if (res.data.assessments.nodes.length !== 0) {
+                  resolve(res.data.assessments.nodes[0]);
+                } else {
+                  createAssessment('Prelude Assessment', orgId)
+                    .then(res => {
+                      resolve({...res.data.assessment.create.assessments[0], ...{campaigns:[]}});
+                    })
+                }
+              });
+          }
+        });
+    })
+  }
+
+  function campaignSelection() {
+      const campaign = $('#campaign-selector option:selected').val();
+      (campaign === 'manual') ? $('#manual-campaign').show() : $('#manual-campaign').hide();
+  }
+
+  function saveVectr(){
+    let vectrConn = {
+      url: $("#vectr-url").val(),
+      database: $("#vectr-db").val(),
+      org_name: $("#vectr-org").val(),
+      key_id: $("#vectr-key-id").val(),
+      secret_key: $("#vectr-secret-key").val(),
+      campaign: $('#campaign-selector option:selected').val() === 'manual' ? $('#vectr-campaign').val() : 'automatic',
+      enabled: true
+    }
+    Requests.fetchOperator('/internal/config/settings', {method: 'GET'}).then(res => res.json()).then(settings => {
+      Requests.fetchOperator('/internal/config/settings', {method: 'POST', body: JSON.stringify({...settings, local: {...settings.local, publishers: {...settings.local.publishers, ...{vectr: vectrConn}}}})})
+        .then(() => {
+          Basic.showNotification('Saved', 'Connection details saved');
+          refreshVectr(vectrConn);
+        });
+    });
+  }
+
+  function refreshVectr(config) {
+    Events.bus.removeAllListeners('publish:vectr');
+    $("#vectr-url").val(config?.url);
+    $("#vectr-db").val(config?.database);
+    $("#vectr-org").val(config?.org_name);
+    $("#vectr-key-id").val(config?.key_id);
+    $("#vectr-secret-key").val(config?.secret_key);
+    if (config?.campaign !== 'automatic') {
+      $('#campaign-selector').val('manual');
+      campaignSelection();
+      $('#vectr-campaign').val(config.campaign);
+    }
+    vectr = config;
+    if (vectr?.url !== '' && vectr?.database !== '' && vectr?.org_name !== '' && vectr.key_id !== '' && vectr.secret_key !== '' && vectr.enabled === true) {
+      initializeVectrAssessment()
+        .then(assessment => {
+          baseAssessment = assessment;
+          initializeOperationCampaignMap()
+            .then(campaignMap => {
+              operationsToCampaign = campaignMap;
+              Events.bus.on('publish:vectr', (link, enabled) => {
+                if(enabled) {
+                  publishLink(link)
+                }
+              });
+            })
+        })
+        .catch(err => Basic.showNotification('Error!', err));
+    }
+  }
+
+  $(document).ready(function () {
+    Requests.fetchOperator('/internal/config/settings', {method: 'GET'}).then(res => res.json()).then(settings => {
+        refreshVectr(settings.local.publishers?.vectr);
+    });
+  });
+</script></div>
